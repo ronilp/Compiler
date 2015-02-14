@@ -59,12 +59,18 @@ void dfa()
             c = str[i];
           
           if(c==32)
-            printf("space\n");
+          {
+            state = space;
+            shouldread = true;
+            i++;
+            break;
+          }
 
           if(isdigit(c)==0 && isalpha(c)==0)
           { // Neither digit nor alphabet
             state = symbol;
             shouldread = false;
+            break;
           }
           
           if(isalpha(c)!=0)
@@ -78,10 +84,12 @@ void dfa()
          
           if(shouldread)
             c = str[i];
-          
-          search(&c);
-          shouldread = true;
-          state = start;
+          if(c>32)
+          {
+            search(&c);
+            shouldread = true;
+            state = start;
+          }
           i++; 
           break;
 
@@ -94,15 +102,17 @@ void dfa()
             i++;
           }
           
+          //printf("\nc = %s\n", &c);
           char new[20];
+          memset(new,0,20);
           int j=0;
-          
+
           while((isalpha(c)!=0 || isdigit(c)!=0))// && str[i] != '\0')
-          { // c is not symbol
+          { // c is not a symbol
             new[j] = c;
             c = str[i]; 
             if(isdigit(c)!=0 || isalpha(c)!=0)
-            { // c is not symbol
+            { // c is not a symbol
               i++;j++;
             }
           }
@@ -113,9 +123,16 @@ void dfa()
 
       case space:
         
-          printf("space state\n");
-          
-          i++;
+          //printf("space state i = %c\n",str[i]);
+          i--;
+          while(c<=32)
+          {
+            i++;
+            c = str[i];
+          }
+          //printf("\nc = %c i = %c\n",c,str[i]);
+          state = start;
+          shouldread = false;
           break;
     }
   }
