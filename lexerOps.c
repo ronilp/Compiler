@@ -16,8 +16,8 @@ void readTokens()
   }
   fclose(f);
 
-  for(i=0;i<numTokens;i++)
-    printf("%s   %s\n",TokenTable.symbols[i],TokenTable.tokens[i]);
+  //for(i=0;i<numTokens;i++)
+    //printf("%s   %s\n",TokenTable.symbols[i],TokenTable.tokens[i]);
   printf("Token reading complete...\n");
 }
 
@@ -55,7 +55,10 @@ void dfa()
       case start:
         
           if(shouldread)
+          {
             c = str[i];
+            i++;
+          }
           
           if(isdigit(c)==0 && isalpha(c)==0)
           { // Neither digit nor alphabet
@@ -68,44 +71,49 @@ void dfa()
             state = keyword_identifier;  
             shouldread = false;
           }
-          
-          i++;
+          //i++;
           break;
 
       case symbol:
-          
+         
           if(shouldread)
+          {
             c = str[i];
-          
+            i++;
+          }
           search(&c);
           shouldread = true;
           state = start;
-          
+          //i++; 
           break;
 
       case keyword_identifier:
-        
+       
+          //i++;
           if(shouldread)
+          {
             c = str[i];
+            i++;
+          }
           
           char new[20];
           int j=0;
           
-          while((isalpha(c)!=0 || isdigit(c)!=0) && str[i] != '\0')
-          { // Either digit or alphabet
-            if(shouldread)
-              c = str[i];
+          while((isalpha(c)!=0 || isdigit(c)!=0))// && str[i] != '\0')
+          { 
             new[j] = c;
-            i++;j++;
-            shouldread = true;
-            //c = str[i];
+            c = str[i]; 
+            if(isdigit(c)!=0 || isalpha(c)!=0)
+            { // c is not symbol
+              i++;j++;
+            }
           }
-          
           search(new);
+          //c = str[i];
           state = start;
+          //i--;
           shouldread = false;
-          
-          i++;
+          //i++;
           break;
 
       case trap:
