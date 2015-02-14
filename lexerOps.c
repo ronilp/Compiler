@@ -57,7 +57,7 @@ void dfa()
           if(shouldread)
           {
             c = str[i];
-            i++;
+            //i++;
           }
           
           if(isdigit(c)==0 && isalpha(c)==0)
@@ -79,17 +79,17 @@ void dfa()
           if(shouldread)
           {
             c = str[i];
-            i++;
+            //i++;
           }
           search(&c);
           shouldread = true;
           state = start;
-          //i++; 
+          i++; 
           break;
 
       case keyword_identifier:
        
-          //i++;
+          i++;
           if(shouldread)
           {
             c = str[i];
