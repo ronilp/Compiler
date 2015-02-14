@@ -46,20 +46,21 @@ void dfa()
 
   char str[20];
   char c;
-  scanf("%s",str);
-
+  FILE *f = fopen("input.txt","r");
+  fgets(str,20,f);
   while(str[i] != '\0')
   {
     switch(state)
     {
       case start:
         
+          //printf("\nstart\n");
           if(shouldread)
-          {
             c = str[i];
-            //i++;
-          }
           
+          if(c==32)
+            printf("space\n");
+
           if(isdigit(c)==0 && isalpha(c)==0)
           { // Neither digit nor alphabet
             state = symbol;
@@ -71,16 +72,13 @@ void dfa()
             state = keyword_identifier;  
             shouldread = false;
           }
-          //i++;
           break;
 
       case symbol:
          
           if(shouldread)
-          {
             c = str[i];
-            //i++;
-          }
+          
           search(&c);
           shouldread = true;
           state = start;
@@ -100,7 +98,7 @@ void dfa()
           int j=0;
           
           while((isalpha(c)!=0 || isdigit(c)!=0))// && str[i] != '\0')
-          { 
+          { // c is not symbol
             new[j] = c;
             c = str[i]; 
             if(isdigit(c)!=0 || isalpha(c)!=0)
@@ -109,16 +107,13 @@ void dfa()
             }
           }
           search(new);
-          //c = str[i];
           state = start;
-          //i--;
           shouldread = false;
-          //i++;
           break;
 
-      case trap:
+      case space:
         
-          printf("trap state\n");
+          printf("space state\n");
           
           i++;
           break;
