@@ -44,10 +44,11 @@ void dfa()
   bool shouldread = true;
   int i=0;
 
-  char str[20];
+  char str[50];
   char c;
   FILE *f = fopen("input.txt","r");
-  fgets(str,20,f);
+  fgets(str,50,f);
+  //printf("char = %cd\n",str[19]);
   while(str[i] != '\0')
   {
     switch(state)
@@ -58,9 +59,13 @@ void dfa()
           if(shouldread)
             c = str[i];
           
-          if(c==32)
-          {
-            state = space;
+          if(c==32 || c==10)
+          { // space or newline
+            //printf("\nnewline or space\n");
+            if(c==32)
+              state = space;
+            else
+              state = newline;
             shouldread = true;
             i++;
             break;
@@ -69,15 +74,18 @@ void dfa()
           if(isdigit(c)==0 && isalpha(c)==0)
           { // Neither digit nor alphabet
             state = symbol;
-            shouldread = false;
-            break;
           }
           
+          if(isdigit(c)!=0)
+          {// Is a digit
+            state = number;
+          }
+
           if(isalpha(c)!=0)
           { // Starts with an alphabet
             state = keyword_identifier;  
-            shouldread = false;
           }
+          shouldread = false;
           break;
 
       case symbol:
@@ -128,6 +136,40 @@ void dfa()
             i++;
             c = str[i];
           }
+          state = start;
+          shouldread = false;
+          break;
+
+      case newline:
+          printf("\nnewline\n");
+          i--;
+          while(c==10)
+          {
+            i++;
+            c = str[i];
+          }
+          state = start;
+          shouldread = false;
+          break;
+
+      case number:
+          i--;
+          bool floatingPoint = false;
+          while(c>=48 && c<=57)
+          {
+            i++;
+            c = str[i];
+            if(c==46)
+            { // Decimal Point
+              i++;
+              c = str[i];
+              floatingPoint = true;
+            }
+          }
+          if(floatingPoint)
+            search("floatingPoint");
+          else
+            search("integer");
           state = start;
           shouldread = false;
           break;

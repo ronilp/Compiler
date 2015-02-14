@@ -1,9 +1,11 @@
 #include<string.h>
-#define numTokens 16
+#define numTokens 42
 #define start 0
 #define keyword_identifier 1
 #define symbol 2
-#define trap 3
+#define space 3
+#define newline 4
+#define number 5
 
 struct table
 {
