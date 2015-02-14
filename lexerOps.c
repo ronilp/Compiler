@@ -102,12 +102,11 @@ void dfa()
             i++;
           }
           
-          //printf("\nc = %s\n", &c);
           char new[20];
           memset(new,0,20);
           int j=0;
 
-          while((isalpha(c)!=0 || isdigit(c)!=0))// && str[i] != '\0')
+          while((isalpha(c)!=0 || isdigit(c)!=0))
           { // c is not a symbol
             new[j] = c;
             c = str[i]; 
@@ -123,14 +122,12 @@ void dfa()
 
       case space:
         
-          //printf("space state i = %c\n",str[i]);
           i--;
           while(c<=32)
           {
             i++;
             c = str[i];
           }
-          //printf("\nc = %c i = %c\n",c,str[i]);
           state = start;
           shouldread = false;
           break;
