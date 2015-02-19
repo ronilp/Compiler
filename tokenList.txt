@@ -39,4 +39,4 @@ literal		      TK_LITERAL
 identifier	    TK_ID
 floatingPoint   TK_FLOATLITERAL
 integer         TK_INTEGERLITERAL
-          			TK_NEWLINE
+newline    			TK_NEWLINE

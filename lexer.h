@@ -1,5 +1,5 @@
 #include<string.h>
-#define numTokens 42
+#define numTokens 43
 #define start 0
 #define keyword_identifier 1
 #define symbol 2
@@ -20,3 +20,6 @@ void readTokens();
 void search(char c[]);
 
 void dfa();
+
+// comments
+// string "*"

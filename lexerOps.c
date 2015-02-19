@@ -30,42 +30,49 @@ void search(char c[])
     if(strcmp(c,TokenTable.symbols[i])==0)
     {
       found = true;
-      printf("%s %s\n",TokenTable.tokens[i],c);
+      printf("<%s>\n",TokenTable.tokens[i]);
+      //printf("%s %s\n",TokenTable.tokens[i],c);
       break;
     }
   }
   if(!found)
-    printf("identifier %s\n",c);
+    printf("<TK_ID, %s>\n",c);
+    //printf("identifier %s\n",c);
 }
 
 void dfa()
 {
   int state = start;
   bool shouldread = true;
-  int i=0;
-
-  char str[50];
+  char str[1000];
   char c;
+  bool flag = false,lastNewline = false;
   FILE *f = fopen("input.txt","r");
-  fgets(str,50,f);
-  //printf("char = %cd\n",str[19]);
-  while(str[i] != '\0')
-  {
-    switch(state)
+  while(1)
+  { 
+    memset(str,0,sizeof(str));
+    if(!fgets(str,1000,f))
+      flag = true;
+    //printf("str = %s\n",str);
+    int i=0;
+
+    while(str[i] != '\0')
     {
-      case start:
+      //printf("state = %d\n",state)
+      switch(state)
+      {
+        case start:
         
-          //printf("\nstart\n");
           if(shouldread)
             c = str[i];
-          
-          if(c==32 || c==10)
-          { // space or newline
-            //printf("\nnewline or space\n");
-            if(c==32)
-              state = space;
-            else
+         
+          if(c<=32)
+          { 
+            // space or newline
+            if(c==10)
               state = newline;
+            else
+              state = space;
             shouldread = true;
             i++;
             break;
@@ -88,8 +95,8 @@ void dfa()
           shouldread = false;
           break;
 
-      case symbol:
-         
+        case symbol:
+           
           if(shouldread)
             c = str[i];
           if(c>32)
@@ -99,10 +106,11 @@ void dfa()
             state = start;
           }
           i++; 
+          lastNewline = false;
           break;
 
-      case keyword_identifier:
-       
+        case keyword_identifier:
+         
           i++;
           if(shouldread)
           {
@@ -110,70 +118,99 @@ void dfa()
             i++;
           }
           
-          char new[20];
-          memset(new,0,20);
+          char new[200];
+          memset(new,0,200);
           int j=0;
 
           while((isalpha(c)!=0 || isdigit(c)!=0))
-          { // c is not a symbol
+          { 
+            // c is not a symbol
             new[j] = c;
             c = str[i]; 
+            
             if(isdigit(c)!=0 || isalpha(c)!=0)
-            { // c is not a symbol
+            {
+            // c is not a symbol
               i++;j++;
             }
           }
           search(new);
           state = start;
           shouldread = false;
+          lastNewline = false;
           break;
 
-      case space:
+        case space:
+          
+          i--;
+          while(c<=32 && c!=10 && str[i] !='\0')
+          {
+            i++;
+            c = str[i];
+          }
+          if(c==10)
+          {
+            state = newline;
+            i--;
+          }
+          state = start;
+          shouldread = false;
+          lastNewline = false;
+          break;
+
+        case newline:
         
-          i--;
-          while(c<=32)
+          if(!lastNewline)
+            search("newline");
+          c = str[i];
+          
+          while(c<=32 && str[i]!='\0')
           {
             i++;
             c = str[i];
           }
-          state = start;
-          shouldread = false;
-          break;
 
-      case newline:
-          printf("\nnewline\n");
-          i--;
-          while(c==10)
-          {
-            i++;
-            c = str[i];
-          }
           state = start;
-          shouldread = false;
-          break;
+          if(str[i]=='\0')
+            lastNewline = true;
+          else
+            lastNewline = false;
+          shouldread = true;
 
-      case number:
+          break;
+        
+        case number:
+          
           i--;
           bool floatingPoint = false;
+          
           while(c>=48 && c<=57)
           {
             i++;
             c = str[i];
             if(c==46)
-            { // Decimal Point
+            {
+              // Decimal Point
               i++;
               c = str[i];
               floatingPoint = true;
             }
           }
+
           if(floatingPoint)
             search("floatingPoint");
           else
             search("integer");
+          
           state = start;
           shouldread = false;
+          lastNewline = false;
           break;
+
+      }
     }
+    if(flag)
+      break;
   }
 }
 
