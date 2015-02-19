@@ -6,6 +6,8 @@
 #define space 3
 #define newline 4
 #define number 5
+#define string_literal 6
+#define comment 7
 
 struct table
 {
@@ -23,3 +25,4 @@ void dfa();
 
 // comments
 // string "*"
+// invalid chars : !,$ etc

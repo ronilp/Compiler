@@ -23,21 +23,24 @@ void readTokens()
 
 void search(char c[])
 {
-  bool found = false;
   int i;
+  
+  if(c[0] == '"')
+  {
+    printf("<TK_STRINGLITERAL, %s>\n",c); 
+    return;
+  }
+  
   for(i=0;i<numTokens;i++)
   {
     if(strcmp(c,TokenTable.symbols[i])==0)
     {
-      found = true;
       printf("<%s>\n",TokenTable.tokens[i]);
-      //printf("%s %s\n",TokenTable.tokens[i],c);
-      break;
+      return;
     }
   }
-  if(!found)
-    printf("<TK_ID, %s>\n",c);
-    //printf("identifier %s\n",c);
+  
+  printf("<TK_ID, %s>\n",c);
 }
 
 void dfa()
@@ -46,7 +49,7 @@ void dfa()
   bool shouldread = true;
   char str[1000];
   char c;
-  bool flag = false,lastNewline = false;
+  bool flag = false,lastNewline = false,error = false;
   FILE *f = fopen("input.txt","r");
   while(1)
   { 
@@ -66,6 +69,14 @@ void dfa()
           if(shouldread)
             c = str[i];
          
+          if(c == '"')
+          {
+            state = string_literal;
+            shouldread = true;
+            break;
+          }
+
+
           if(c<=32)
           { 
             // space or newline
@@ -95,6 +106,7 @@ void dfa()
           shouldread = false;
           break;
 
+
         case symbol:
            
           if(shouldread)
@@ -108,6 +120,7 @@ void dfa()
           i++; 
           lastNewline = false;
           break;
+
 
         case keyword_identifier:
          
@@ -140,6 +153,7 @@ void dfa()
           lastNewline = false;
           break;
 
+
         case space:
           
           i--;
@@ -158,6 +172,7 @@ void dfa()
           lastNewline = false;
           break;
 
+
         case newline:
         
           if(!lastNewline)
@@ -170,15 +185,16 @@ void dfa()
             c = str[i];
           }
 
-          state = start;
           if(str[i]=='\0')
             lastNewline = true;
           else
             lastNewline = false;
+          
+          state = start;
           shouldread = true;
-
           break;
         
+
         case number:
           
           i--;
@@ -204,6 +220,53 @@ void dfa()
           
           state = start;
           shouldread = false;
+          lastNewline = false;
+          
+          break;
+
+
+        case string_literal:
+          
+          memset(new,0,200);
+          j=1;
+          new[0] = '"';
+          i++;
+
+          while(str[i] != '"')
+          {
+            new[j] = str[i];
+            i++;j++;
+          
+            if(str[i] == '\0')
+            { 
+              printf("string error\n"); 
+              error = true;
+              break;
+            }
+          }
+          
+          if(!error)
+          {
+            new[j] = c;
+            search(new);
+          }
+          else
+          {
+            state = start;
+            shouldread = true;
+            lastNewline = false;
+            error = false;
+            break;
+          }
+ 
+          i++;
+          error = false;
+          state = start;
+          shouldread = true;
+          lastNewline = false;
+          break;
+
+        case comment:
           lastNewline = false;
           break;
 

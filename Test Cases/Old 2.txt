@@ -1,0 +1,28 @@
+function void main()
+{
+    Protein P1
+    Protein P2
+    read(P1)
+    read(P2)
+    int i
+    int match
+    match is 0
+    Protein P3
+    Condition((length(P1)>length(P2)) or (length(P1)=length(P2)))   @bracket precedence
+    {
+        P3 is P1
+        P1 is P2
+        P2 is P3
+    }
+    repeat i from 0 to length(P1)
+    {
+        condition(nucleotide(P1,i)=nucleotide(P2,i))
+        {
+            match is match+1
+        }
+    }
+    int percentmatch
+    percentmatch is (match*100)/length(P2)
+    write(percentmatch)
+    return
+}

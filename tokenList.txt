@@ -35,7 +35,7 @@ length		      TK_LENGTH
 condition	      TK_CONDITION
 otherwise     	TK_OTHERWISE
 end		        	TK_END
-literal		      TK_LITERAL
+literal		      TK_STRINGLITERAL
 identifier	    TK_ID
 floatingPoint   TK_FLOATLITERAL
 integer         TK_INTEGERLITERAL
