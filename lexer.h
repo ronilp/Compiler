@@ -8,6 +8,9 @@
 #define number 5
 #define string_literal 6
 #define comment 7
+#define MAX_STRING_LENGTH 200
+#define MAX_IDENTIFIER_LENGTH 200
+#define BUFFER_LENGTH 1000
 
 struct table
 {
@@ -19,10 +22,9 @@ struct table TokenTable;
 
 void readTokens();
 
-void search(char c[]);
+void search(char c[], FILE *f);
 
 void dfa();
 
-// comments
-// string "*"
 // invalid chars : !,$ etc
+// 2 decimal points

@@ -15,19 +15,15 @@ void readTokens()
     n--;
   }
   fclose(f);
-
-  //for(i=0;i<numTokens;i++)
-    //printf("%s   %s\n",TokenTable.symbols[i],TokenTable.tokens[i]);
-  printf("Token reading complete...\n");
 }
 
-void search(char c[])
+void search(char c[],FILE *f)
 {
   int i;
   
   if(c[0] == '"')
   {
-    printf("<TK_STRINGLITERAL, %s>\n",c); 
+    fprintf(f,"<TK_STRINGLITERAL, %s>\n",c); 
     return;
   }
   
@@ -35,27 +31,31 @@ void search(char c[])
   {
     if(strcmp(c,TokenTable.symbols[i])==0)
     {
-      printf("<%s>\n",TokenTable.tokens[i]);
+      fprintf(f,"<%s>\n",TokenTable.tokens[i]);
       return;
     }
   }
   
-  printf("<TK_ID, %s>\n",c);
+  fprintf(f,"<TK_ID, %s>\n",c);
 }
 
 void dfa()
 {
   int state = start;
   bool shouldread = true;
-  char str[1000];
+  char str[BUFFER_LENGTH];
   char c;
-  bool flag = false,lastNewline = false,error = false;
+  bool flag = false, lastNewline = false, error = false;
   FILE *f = fopen("input.txt","r");
+  FILE *o = fopen("output.txt","w");
+
   while(1)
   { 
     memset(str,0,sizeof(str));
-    if(!fgets(str,1000,f))
+  
+    if(!fgets(str,BUFFER_LENGTH,f))
       flag = true;
+    
     //printf("str = %s\n",str);
     int i=0;
 
@@ -69,6 +69,12 @@ void dfa()
           if(shouldread)
             c = str[i];
          
+          if(c == '$')
+          {
+            state = comment;
+            break;
+          }
+
           if(c == '"')
           {
             state = string_literal;
@@ -90,17 +96,20 @@ void dfa()
           }
 
           if(isdigit(c)==0 && isalpha(c)==0)
-          { // Neither digit nor alphabet
+          { 
+            // Neither digit nor alphabet
             state = symbol;
           }
           
           if(isdigit(c)!=0)
-          {// Is a digit
+          {
+            // Is a digit
             state = number;
           }
 
           if(isalpha(c)!=0)
-          { // Starts with an alphabet
+          {
+            // Starts with an alphabet
             state = keyword_identifier;  
           }
           shouldread = false;
@@ -113,7 +122,7 @@ void dfa()
             c = str[i];
           if(c>32)
           {
-            search(&c);
+            search(&c,o);
             shouldread = true;
             state = start;
           }
@@ -131,8 +140,8 @@ void dfa()
             i++;
           }
           
-          char new[200];
-          memset(new,0,200);
+          char new[MAX_IDENTIFIER_LENGTH];
+          memset(new,0,MAX_IDENTIFIER_LENGTH);
           int j=0;
 
           while((isalpha(c)!=0 || isdigit(c)!=0))
@@ -147,7 +156,8 @@ void dfa()
               i++;j++;
             }
           }
-          search(new);
+        
+          search(new,o);
           state = start;
           shouldread = false;
           lastNewline = false;
@@ -176,7 +186,7 @@ void dfa()
         case newline:
         
           if(!lastNewline)
-            search("newline");
+            search("newline",o);
           c = str[i];
           
           while(c<=32 && str[i]!='\0')
@@ -214,9 +224,9 @@ void dfa()
           }
 
           if(floatingPoint)
-            search("floatingPoint");
+            search("floatingPoint",o);
           else
-            search("integer");
+            search("integer",o);
           
           state = start;
           shouldread = false;
@@ -227,7 +237,7 @@ void dfa()
 
         case string_literal:
           
-          memset(new,0,200);
+          memset(new,0,MAX_STRING_LENGTH);
           j=1;
           new[0] = '"';
           i++;
@@ -248,7 +258,7 @@ void dfa()
           if(!error)
           {
             new[j] = c;
-            search(new);
+            search(new,o);
           }
           else
           {
@@ -267,6 +277,12 @@ void dfa()
           break;
 
         case comment:
+          
+          while(str[i] != '\0')
+            i++;
+
+          state = start;
+          shouldread = true;
           lastNewline = false;
           break;
 

@@ -1,0 +1,15 @@
+<TK_ID, fro>
+<TK_NEWLINE>
+<TK_ID, hell>
+<TK_NEWLINE>
+<TK_CUT>
+<TK_STRINGLITERAL, "%(">
+<TK_MULTIPLY>
+<TK_RBRACE>
+<TK_NEWLINE>
+<TK_ID, Hel>
+<TK_STRINGLITERAL, "lo W">
+<TK_ID, orld>
+<TK_ID, !>
+<TK_NEWLINE>
+<TK_RBRACE>
