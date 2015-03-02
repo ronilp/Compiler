@@ -9,6 +9,7 @@ main()
     }
     int sumA
     int sumB
+    $ This is a comment
     repeat i from 0 to 3
     {
         sumA is sumA + A[i]

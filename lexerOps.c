@@ -23,7 +23,7 @@ void search(char c[],FILE *f)
   
   if(c[0] == '"')
   {
-    fprintf(f,"<TK_STRINGLITERAL, %s> Line = %d\n",c,line); 
+    fprintf(f,"<TK_STRINGLITERAL, %s> Line = %d\n",c); 
     return;
   }
   
@@ -31,12 +31,12 @@ void search(char c[],FILE *f)
   {
     if(strcmp(c,TokenTable.symbols[i])==0)
     {
-      fprintf(f,"<%s> Line = %d\n",TokenTable.tokens[i],line);
+      fprintf(f,"<%s> Line = %d\n",TokenTable.tokens[i]);
       return;
     }
   }
 
-  fprintf(f,"<TK_ID, %s> Line = %d\n",c,line);
+  fprintf(f,"<TK_ID, %s> Line = %d\n",c);
 }
 
 void searchNumber(char c[], FILE *f, bool floatingPoint)
@@ -54,8 +54,13 @@ void dfa()
   char str[BUFFER_LENGTH];
   char c;
   bool flag = false, lastNewline = false, error = false, lastComment = true;
+  FILE *f = fopen("1.txt","r");
+/*  FILE *f = fopen("2.txt","r");
+  FILE *f = fopen("3.txt","r");
+  FILE *f = fopen("4.txt","r");
+  FILE *f = fopen("5.txt","r");
   FILE *f = fopen("input.txt","r");
-  FILE *o = fopen("output.txt","w");
+*/  FILE *o = fopen("output.txt","w");
 
   while(1)
   { 
@@ -196,10 +201,12 @@ void dfa()
         case newline:
             
           line++;
+          
           if(!lastNewline && !lastComment)
             search("newline",o);
-          c = str[i];
           
+          c = str[i];
+            
           while(c<=32 && str[i]!='\0')
           {
             i++;
@@ -207,10 +214,7 @@ void dfa()
           }
 
           if(str[i]=='\0')
-          {
             lastNewline = true;
-            //line++;
-          }
           else
             lastNewline = false;
           
@@ -244,7 +248,7 @@ void dfa()
               floatingPoint = true;
             }
           }
-          k--;
+         
           searchNumber(num,o,floatingPoint);
           
           state = start;
@@ -300,12 +304,14 @@ void dfa()
           
           while(str[i] != '\0')
             i++;
-
-          //line++;
-          lastComment = true;
+            
+          if(str[i] == 10)
+            line++;
+          line++;
           state = start;
           shouldread = true;
           lastNewline = false;
+          lastComment = true;
           break;
 
       }
