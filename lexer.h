@@ -1,5 +1,5 @@
 #include<string.h>
-#define numTokens 43
+#define numTokens 42
 #define start 0
 #define keyword_identifier 1
 #define symbol 2
@@ -11,11 +11,12 @@
 #define MAX_STRING_LENGTH 200
 #define MAX_IDENTIFIER_LENGTH 200
 #define BUFFER_LENGTH 1000
+#define MAX_NUMBER_LENGTH 100
 
 struct table
 {
-  char symbols[numTokens][20];
-  char tokens[numTokens][20];
+  char symbols[numTokens][MAX_IDENTIFIER_LENGTH];
+  char tokens[numTokens][MAX_IDENTIFIER_LENGTH];
 };
 
 struct table TokenTable;

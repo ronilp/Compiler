@@ -39,6 +39,14 @@ void search(char c[],FILE *f)
   fprintf(f,"<TK_ID, %s>\n",c);
 }
 
+void searchNumber(char c[], FILE *f, bool floatingPoint)
+{
+  if(!floatingPoint)
+    fprintf(f,"<TK_INTEGERLITERAL, %s>\n",c);
+  else
+    fprintf(f,"<TK_FLOATLITERAL, %s>\n",c);
+}
+
 void dfa()
 {
   int state = start;
@@ -56,12 +64,10 @@ void dfa()
     if(!fgets(str,BUFFER_LENGTH,f))
       flag = true;
     
-    //printf("str = %s\n",str);
     int i=0;
 
     while(str[i] != '\0')
     {
-      //printf("state = %d\n",state)
       switch(state)
       {
         case start:
@@ -81,7 +87,6 @@ void dfa()
             shouldread = true;
             break;
           }
-
 
           if(c<=32)
           { 
@@ -139,7 +144,7 @@ void dfa()
             c = str[i];
             i++;
           }
-          
+
           char new[MAX_IDENTIFIER_LENGTH];
           memset(new,0,MAX_IDENTIFIER_LENGTH);
           int j=0;
@@ -209,24 +214,28 @@ void dfa()
           
           i--;
           bool floatingPoint = false;
-          
+          char num[MAX_NUMBER_LENGTH];
+          memset(num,0,MAX_NUMBER_LENGTH);
+          int k=-1;
+            
           while(c>=48 && c<=57)
           {
-            i++;
+            i++;k++;
             c = str[i];
+            if(isdigit(c) != 0 || c == 46)
+                num[k] = c;
             if(c==46)
             {
               // Decimal Point
-              i++;
+              i++;k++;
               c = str[i];
+              if(isdigit(c) != 0 || c == 46)
+                num[k] = c;
               floatingPoint = true;
             }
           }
-
-          if(floatingPoint)
-            search("floatingPoint",o);
-          else
-            search("integer",o);
+          k--;
+          searchNumber(num,o,floatingPoint);
           
           state = start;
           shouldread = false;

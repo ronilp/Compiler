@@ -1,9 +1,9 @@
-fro$m % to # tag (a+b) is 3.32 {   
+from % to # tag (a+b) is 3.32 {   
 
-  $ hi, whats up
-  hell
+  hi, whats up
+  $hell
 
-  #"%("*} $ 34
+  #"%("*}  34
 
   Hel"lo W"orld!
 }
