@@ -1,32 +1,33 @@
-<TK_FROM>
-<TK_MOD>
-<TK_TO>
-<TK_CUT>
-<TK_ID, tag>
-<TK_LPAR>
-<TK_ID, a>
-<TK_PLUS>
-<TK_ID, b>
-<TK_RPAR>
-<TK_ASSIGNOP>
+<TK_FROM> Line = 1
+<TK_MOD> Line = 1
+<TK_TO> Line = 1
+<TK_CUT> Line = 1
+<TK_ID, tag> Line = 1
+<TK_LPAR> Line = 1
+<TK_ID, a> Line = 1
+<TK_PLUS> Line = 1
+<TK_ID, b> Line = 1
+<TK_RPAR> Line = 1
+<TK_ASSIGNOP> Line = 1
 <TK_FLOATLITERAL, 3.32>
-<TK_LBRACE>
-<TK_NEWLINE>
-<TK_ID, hi>
-<TK_COMMA>
-<TK_ID, whats>
-<TK_ID, up>
-<TK_NEWLINE>
-<TK_NEWLINE>
-<TK_CUT>
-<TK_STRINGLITERAL, "%(">
-<TK_MULTIPLY>
-<TK_RBRACE>
+<TK_LBRACE> Line = 1
+<TK_NEWLINE> Line = 2
+<TK_ID, hi> Line = 3
+<TK_COMMA> Line = 3
+<TK_ID, whats> Line = 3
+<TK_ID, up> Line = 3
+<TK_NEWLINE> Line = 4
+<TK_CUT> Line = 5
+<TK_STRINGLITERAL, "%("> Line = 5
+<TK_MULTIPLY> Line = 5
+<TK_RBRACE> Line = 5
 <TK_INTEGERLITERAL, 34>
-<TK_NEWLINE>
-<TK_ID, Hel>
-<TK_STRINGLITERAL, "lo W">
-<TK_ID, orld>
-<TK_ID, !>
-<TK_NEWLINE>
-<TK_RBRACE>
+<TK_NEWLINE> Line = 6
+<TK_ID, Hel> Line = 6
+<TK_STRINGLITERAL, "lo W"> Line = 6
+<TK_ID, orld> Line = 6
+<TK_ID, !> Line = 6
+<TK_NEWLINE> Line = 7
+<TK_ID, new> Line = 7
+<TK_NEWLINE> Line = 8
+<TK_RBRACE> Line = 8

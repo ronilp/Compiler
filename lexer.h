@@ -10,7 +10,7 @@
 #define comment 7
 #define MAX_STRING_LENGTH 200
 #define MAX_IDENTIFIER_LENGTH 200
-#define BUFFER_LENGTH 1000
+#define BUFFER_LENGTH 4096
 #define MAX_NUMBER_LENGTH 100
 
 struct table
@@ -27,5 +27,11 @@ void search(char c[], FILE *f);
 
 void dfa();
 
+int line = 1;
+
 // invalid chars : !,$ etc
 // 2 decimal points
+// identifier length exceeds max
+// number length exceeds max
+// 1.2abc
+// 12abc

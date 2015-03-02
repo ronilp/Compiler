@@ -6,4 +6,6 @@ from % to # tag (a+b) is 3.32 {
   #"%("*}  34
 
   Hel"lo W"orld!
+  new 
+  $comment
 }
