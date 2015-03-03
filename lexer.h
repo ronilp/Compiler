@@ -30,8 +30,9 @@ void dfa();
 int line = 1;
 
 // invalid chars : !,$ etc
-// 2 decimal points
+// 2 decimal points DONE
 // identifier length exceeds max
 // number length exceeds max
-// 1.2abc
-// 12abc
+// 12abc DONE
+// ab.c || ab@c
+// Non matching "" DONE

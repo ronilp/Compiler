@@ -54,13 +54,10 @@ void dfa()
   char str[BUFFER_LENGTH];
   char c;
   bool flag = false, lastNewline = false, error = false, lastComment = true;
-  FILE *f = fopen("1.txt","r");
-/*  FILE *f = fopen("2.txt","r");
-  FILE *f = fopen("3.txt","r");
-  FILE *f = fopen("4.txt","r");
-  FILE *f = fopen("5.txt","r");
-  FILE *f = fopen("input.txt","r");
-*/  FILE *o = fopen("output.txt","w");
+  FILE *f = fopen("errors1.txt","r");
+  //FILE *f = fopen("1.txt","r");
+  //FILE *f = fopen("input.txt","r");
+  FILE *o = fopen("output.txt","w");
 
   while(1)
   { 
@@ -248,8 +245,39 @@ void dfa()
               floatingPoint = true;
             }
           }
-         
-          searchNumber(num,o,floatingPoint);
+          
+          bool floaterror = false;
+
+          /* Error checking for 2 decimal points */
+          if(floatingPoint)
+          {
+            int decimalCount=0;
+            int iter;
+            
+            for(iter = 0; iter < k; iter++)
+            {
+              if(num[iter] == '.')
+                decimalCount++;
+            }
+            
+            if(decimalCount > 1)
+            {
+              printf("LEXICAL ERROR :\nMore than 1 decimal points in the entered float literal in line %d\n",line);
+              floaterror = true;
+            }
+          }
+          
+          bool illegalnumber = false;
+
+          /* Error checking for illegal numbers like 12ab */
+          if(isalpha(c))
+          {
+            printf("LEXICAL ERROR :\nIllegal Number in line %d\n",line);
+            illegalnumber = true;
+          }
+
+          if(!floaterror && !illegalnumber)
+            searchNumber(num,o,floatingPoint);
           
           state = start;
           shouldread = false;
