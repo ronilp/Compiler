@@ -23,7 +23,7 @@ void search(char c[],FILE *f)
   
   if(c[0] == '"')
   {
-    fprintf(f,"<TK_STRINGLITERAL, %s> Line = %d\n",c); 
+    fprintf(f,"<TK_STRINGLITERAL, %s>\n",c); 
     return;
   }
   
@@ -31,12 +31,12 @@ void search(char c[],FILE *f)
   {
     if(strcmp(c,TokenTable.symbols[i])==0)
     {
-      fprintf(f,"<%s> Line = %d\n",TokenTable.tokens[i]);
+      fprintf(f,"<%s>\n",TokenTable.tokens[i]);
       return;
     }
   }
 
-  fprintf(f,"<TK_ID, %s> Line = %d\n",c);
+  fprintf(f,"<TK_ID, %s>\n",c);
 }
 
 void searchNumber(char c[], FILE *f, bool floatingPoint)
@@ -272,7 +272,7 @@ void dfa()
           
             if(str[i] == '\0')
             { 
-              printf("string error\n"); 
+              printf("LEXICAL ERROR :\nMatching quotes not present in line %d\n", line); 
               error = true;
               break;
             }

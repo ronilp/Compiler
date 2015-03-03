@@ -1,124 +1,121 @@
-<TK_MAIN> Line = 1
-<TK_LPAR> Line = 1
-<TK_RPAR> Line = 1
-<TK_NEWLINE> Line = 2
-<TK_LBRACE> Line = 2
-<TK_NEWLINE> Line = 3
-<TK_INT> Line = 3
-<TK_ID, A> Line = 3
-<TK_LSQBRAC> Line = 3
+<TK_MAIN>
+<TK_LPAR>
+<TK_RPAR>
+<TK_NEWLINE>
+<TK_LBRACE>
+<TK_NEWLINE>
+<TK_INT>
+<TK_ID, A>
+<TK_LSQBRAC>
 <TK_INTEGERLITERAL, 3>
-<TK_RSQBRAC> Line = 3
-<TK_NEWLINE> Line = 4
-<TK_INT> Line = 4
-<TK_ID, B> Line = 4
-<TK_LSQBRAC> Line = 4
+<TK_RSQBRAC>
+<TK_NEWLINE>
+<TK_INT>
+<TK_ID, B>
+<TK_LSQBRAC>
 <TK_INTEGERLITERAL, 3>
-<TK_RSQBRAC> Line = 4
-<TK_NEWLINE> Line = 5
-<TK_REPEAT> Line = 5
-<TK_ID, i> Line = 5
-<TK_FROM> Line = 5
+<TK_RSQBRAC>
+<TK_NEWLINE>
+<TK_REPEAT>
+<TK_ID, i>
+<TK_FROM>
 <TK_INTEGERLITERAL, 0>
-<TK_TO> Line = 5
+<TK_TO>
 <TK_INTEGERLITERAL, 3>
-<TK_NEWLINE> Line = 6
-<TK_LBRACE> Line = 6
-<TK_NEWLINE> Line = 7
-<TK_ID, A> Line = 7
-<TK_LSQBRAC> Line = 7
-<TK_ID, i> Line = 7
-<TK_RSQBRAC> Line = 7
-<TK_ASSIGNOP> Line = 7
+<TK_NEWLINE>
+<TK_LBRACE>
+<TK_NEWLINE>
+<TK_ID, A>
+<TK_LSQBRAC>
+<TK_ID, i>
+<TK_RSQBRAC>
+<TK_ASSIGNOP>
 <TK_INTEGERLITERAL, 12>
-<TK_MULTIPLY> Line = 7
-<TK_ID, i> Line = 7
-<TK_NEWLINE> Line = 8
-<TK_ID, B> Line = 8
-<TK_LSQBRAC> Line = 8
-<TK_ID, i> Line = 8
-<TK_RSQBRAC> Line = 8
-<TK_ASSIGNOP> Line = 8
+<TK_MULTIPLY>
+<TK_ID, i>
+<TK_NEWLINE>
+<TK_ID, B>
+<TK_LSQBRAC>
+<TK_ID, i>
+<TK_RSQBRAC>
+<TK_ASSIGNOP>
 <TK_INTEGERLITERAL, 2>
-<TK_MULTIPLY> Line = 8
-<TK_ID, i> Line = 8
-<TK_NEWLINE> Line = 9
-<TK_RBRACE> Line = 9
-<TK_NEWLINE> Line = 10
-<TK_INT> Line = 10
-<TK_ID, sumA> Line = 10
-<TK_NEWLINE> Line = 11
-<TK_INT> Line = 11
-<TK_ID, sumB> Line = 11
-<TK_NEWLINE> Line = 12
-<TK_REPEAT> Line = 13
-<TK_ID, i> Line = 13
-<TK_FROM> Line = 13
+<TK_MULTIPLY>
+<TK_ID, i>
+<TK_NEWLINE>
+<TK_RBRACE>
+<TK_NEWLINE>
+<TK_INT>
+<TK_ID, sumA>
+<TK_NEWLINE>
+<TK_INT>
+<TK_ID, sumB>
+<TK_NEWLINE>
+<TK_REPEAT>
+<TK_ID, i>
+<TK_FROM>
 <TK_INTEGERLITERAL, 0>
-<TK_TO> Line = 13
+<TK_TO>
 <TK_INTEGERLITERAL, 3>
-<TK_NEWLINE> Line = 14
-<TK_LBRACE> Line = 14
-<TK_NEWLINE> Line = 15
-<TK_ID, sumA> Line = 15
-<TK_ASSIGNOP> Line = 15
-<TK_ID, sumA> Line = 15
-<TK_PLUS> Line = 15
-<TK_ID, A> Line = 15
-<TK_LSQBRAC> Line = 15
-<TK_ID, i> Line = 15
-<TK_RSQBRAC> Line = 15
-<TK_NEWLINE> Line = 16
-<TK_ID, sumB> Line = 16
-<TK_ASSIGNOP> Line = 16
-<TK_ID, sumB> Line = 16
-<TK_PLUS> Line = 16
-<TK_ID, B> Line = 16
-<TK_LSQBRAC> Line = 16
-<TK_ID, i> Line = 16
-<TK_RSQBRAC> Line = 16
-<TK_NEWLINE> Line = 17
-<TK_RBRACE> Line = 17
-<TK_NEWLINE> Line = 18
-<TK_WRITE> Line = 18
-<TK_LPAR> Line = 18
-<TK_STRINGLITERAL, "Sum of 1st Array = "> Line = 18
-<TK_RPAR> Line = 18
-<TK_NEWLINE> Line = 19
-<TK_WRITE> Line = 19
-<TK_LPAR> Line = 19
-<TK_ID, c> Line = 19
-<TK_RPAR> Line = 19
-<TK_NEWLINE> Line = 20
-<TK_WRITE> Line = 20
-<TK_LPAR> Line = 20
-<TK_STRINGLITERAL, " Sum of 2nd Array = "> Line = 20
-<TK_RPAR> Line = 20
-<TK_NEWLINE> Line = 21
-<TK_WRITE> Line = 21
-<TK_LPAR> Line = 21
-<TK_ID, d> Line = 21
-<TK_RPAR> Line = 21
-<TK_NEWLINE> Line = 22
-<TK_WRITE> Line = 22
-<TK_LPAR> Line = 22
-<TK_STRINGLITERAL, "Total Sum = "> Line = 22
-<TK_RPAR> Line = 22
-<TK_NEWLINE> Line = 23
-<TK_INT> Line = 23
-<TK_ID, e> Line = 23
-<TK_NEWLINE> Line = 24
-<TK_ID, e> Line = 24
-<TK_ASSIGNOP> Line = 24
-<TK_ID, sumA> Line = 24
-<TK_PLUS> Line = 24
-<TK_ID, sumB> Line = 24
-<TK_NEWLINE> Line = 25
-<TK_WRITE> Line = 25
-<TK_LPAR> Line = 25
-<TK_ID, e> Line = 25
-<TK_RPAR> Line = 25
-<TK_NEWLINE> Line = 26
-<TK_RETURN> Line = 26
-<TK_NEWLINE> Line = 27
-<TK_RBRACE> Line = 27
+<TK_NEWLINE>
+<TK_LBRACE>
+<TK_NEWLINE>
+<TK_ID, sumA>
+<TK_ASSIGNOP>
+<TK_ID, sumA>
+<TK_PLUS>
+<TK_ID, A>
+<TK_LSQBRAC>
+<TK_ID, i>
+<TK_RSQBRAC>
+<TK_NEWLINE>
+<TK_ID, sumB>
+<TK_ASSIGNOP>
+<TK_ID, sumB>
+<TK_PLUS>
+<TK_ID, B>
+<TK_LSQBRAC>
+<TK_ID, i>
+<TK_RSQBRAC>
+<TK_NEWLINE>
+<TK_RBRACE>
+<TK_NEWLINE>
+<TK_WRITE>
+<TK_LPAR>
+<TK_WRITE>
+<TK_LPAR>
+<TK_ID, c>
+<TK_RPAR>
+<TK_NEWLINE>
+<TK_WRITE>
+<TK_LPAR>
+<TK_STRINGLITERAL, " Sum of 2nd Array = ">
+<TK_RPAR>
+<TK_NEWLINE>
+<TK_WRITE>
+<TK_LPAR>
+<TK_ID, d>
+<TK_RPAR>
+<TK_NEWLINE>
+<TK_WRITE>
+<TK_LPAR>
+<TK_STRINGLITERAL, "Total Sum = ">
+<TK_RPAR>
+<TK_NEWLINE>
+<TK_INT>
+<TK_ID, e>
+<TK_NEWLINE>
+<TK_ID, e>
+<TK_ASSIGNOP>
+<TK_ID, sumA>
+<TK_PLUS>
+<TK_ID, sumB>
+<TK_NEWLINE>
+<TK_WRITE>
+<TK_LPAR>
+<TK_ID, e>
+<TK_RPAR>
+<TK_NEWLINE>
+<TK_RETURN>
+<TK_NEWLINE>
+<TK_RBRACE>
