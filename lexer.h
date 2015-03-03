@@ -11,7 +11,7 @@
 #define MAX_STRING_LENGTH 200
 #define MAX_IDENTIFIER_LENGTH 200
 #define BUFFER_LENGTH 4096
-#define MAX_NUMBER_LENGTH 100
+#define MAX_NUMBER_LENGTH 10
 
 struct table
 {
@@ -28,6 +28,8 @@ void search(char c[], FILE *f);
 void dfa();
 
 int line = 1;
+
+bool lexicalError = false;
 
 // ERROR TYPES
 // invalid chars : !,$ etc ab.c || ab@c DONE

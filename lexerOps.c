@@ -38,6 +38,7 @@ void search(char c[],FILE *f)
     
   if(isalpha(c[0]) == 0)
   {
+    lexicalError = true;
     printf("LEXICAL ERROR :\nInvalid character %s in line %d\n",c,line);
     return;
   }
@@ -60,8 +61,7 @@ void dfa()
   char str[BUFFER_LENGTH];
   char c;
   bool flag = false, lastNewline = false, error = false, lastComment = true;
-  FILE *f = fopen("errors1.txt","r");
-  //FILE *f = fopen("1.txt","r");
+  FILE *f = fopen("errors.txt","r");
   //FILE *f = fopen("input.txt","r");
   FILE *o = fopen("output.txt","w");
 
@@ -71,8 +71,6 @@ void dfa()
   
     if(!fgets(str,BUFFER_LENGTH,f))
       flag = true;
-    
-    //printf("%s",str); 
     
     int i=0;
 
@@ -175,6 +173,7 @@ void dfa()
             /* Error checking for max identifier length */
             if(j > MAX_IDENTIFIER_LENGTH)
             {
+              lexicalError = true;
               printf("LEXICAL ERROR :\nIdentifier length exceeds maximum allowed length in line %d\n",line);
               break;
             }
@@ -259,11 +258,17 @@ void dfa()
                 num[k] = c;
               floatingPoint = true;
             }
-
+            
             /* Error checking for max string length */
-            if(k > MAX_NUMBER_LENGTH)
+            if(k >= MAX_NUMBER_LENGTH)
             {
+              lexicalError = true;
               printf("LEXICAL ERROR :\nNumber length greater exceeds maximum allowed in line %d\n",line);
+             
+              // remove remaining numbers
+              while(isdigit(str[i])!=0)
+                i++;
+
               break;
             }
           }
@@ -284,6 +289,7 @@ void dfa()
             
             if(decimalCount > 1)
             {
+              lexicalError = true;
               printf("LEXICAL ERROR :\nMore than 1 decimal points in the entered float literal in line %d\n",line);
               floaterror = true;
             }
@@ -294,6 +300,7 @@ void dfa()
           /* Error checking for illegal numbers like 12ab */
           if(isalpha(c))
           {
+            lexicalError = true;
             printf("LEXICAL ERROR :\nIllegal Number in line %d\n",line);
             illegalnumber = true;
           }
@@ -323,6 +330,7 @@ void dfa()
             /* Error checking for matching quotes */
             if(str[i] == '\0')
             { 
+              lexicalError = true;
               printf("LEXICAL ERROR :\nMatching quotes not present in line %d\n", line); 
               error = true;
               break;
@@ -336,6 +344,7 @@ void dfa()
               {
                 if(str[i] == '\0')
                 {
+                  lexicalError = true;
                   printf("LEXICAL ERROR :\nMatching quotes not present in line %d\n", line); 
                   quoteserror = true;
                   line++;
@@ -344,7 +353,10 @@ void dfa()
                 i++;
               }
               if(!quoteserror)
-                  printf("LEXICAL ERROR :\nString length exceeds maximum allowed length in line %d\n",line);
+              {
+                lexicalError = true;
+                printf("LEXICAL ERROR :\nString length exceeds maximum allowed length in line %d\n",line);
+              }
               break;
             }
           }
@@ -390,6 +402,13 @@ void dfa()
     }
     if(flag)
       break;
+  }
+  
+  fcloseall();
+  if(lexicalError)
+  {
+    FILE *o = fopen("output.txt","w");
+    fcloseall();
   }
 }
 
