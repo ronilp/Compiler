@@ -91,22 +91,19 @@ void parse()
     char tk[MAX_TOKEN_LENGTH];
     int tpos,ntpos;
 
-    printf("Popped = %s\n",Top(S));
-    //printf("token stream = %s\n",TokenStream[tokenIndex]);
     ntpos = nonterminalPosition(Pop(S));
     tpos = terminalPosition(TokenStream[tokenIndex]);
 
     ruleNumber = parseTable[ntpos][tpos];
-    //printf("nt,t,rule = %d,%d, %d\n",ntpos,tpos,ruleNumber);
-    //printf("rule %d = %s\n",ruleNumber,Grammar[ruleNumber-1]);
 
     int j=0,i;
     char *nt;
     char rule[numTerminals + numNonTerminals][MAX_TERMINAL_SIZE];
   
-    //nt1 = strdup(Grammar[ruleNumber-1]);
-    //nt = strtok(nt1," \n");
-    nt = strtok(Grammar[ruleNumber-1]," \n");
+    char temp[100];
+    strcpy(temp,Grammar[ruleNumber-1]);
+
+    nt = strtok(temp," \n");
     
     while(nt != NULL)
     {
@@ -125,19 +122,24 @@ void parse()
     }
     printf("\n");
 
-    while(terminalPosition(Top(S)) != -1)
+    if(!isEmpty(S))
     {
-      if(strcmp(Top(S),TokenStream[tokenIndex]) == 0)
+      while(terminalPosition(Top(S)) != -1)
       {
-        tokenIndex++;
-        Pop(S);
+        if(strcmp(Top(S),TokenStream[tokenIndex]) == 0)
+        {
+          tokenIndex++;
+          Pop(S);
+        }
       }
+      
+      while(strcmp(Top(S),"e") == 0)
+        Pop(S);
     }
-    
-    while(strcmp(Top(S),"e") == 0)
-      Pop(S);
   }
   // tokenIndex should be = numTokens now
+  if(tokenIndex == numTokens)
+    printf("done\n");
 }
 
 int main()
