@@ -13,7 +13,8 @@
 <TK_INT>
 <TK_ID, B>
 <TK_LSQBRAC>
-<TK_INTEGERLITERAL, 3>
+<TK_INTEGERLITERAL, 300000000000>
+<TK_INTEGERLITERAL, 000000000>
 <TK_RSQBRAC>
 <TK_NEWLINE>
 <TK_REPEAT>
@@ -48,7 +49,8 @@
 <TK_ID, sumA>
 <TK_NEWLINE>
 <TK_INT>
-<TK_ID, sumB>
+<TK_ID, su>
+<TK_ID, mB>
 <TK_NEWLINE>
 <TK_REPEAT>
 <TK_ID, i>
@@ -81,6 +83,7 @@
 <TK_NEWLINE>
 <TK_WRITE>
 <TK_LPAR>
+<TK_STRINGLITERAL, "Sum of 1st Array = )">
 <TK_WRITE>
 <TK_LPAR>
 <TK_ID, c>
@@ -100,6 +103,10 @@
 <TK_LPAR>
 <TK_STRINGLITERAL, "Total Sum = ">
 <TK_RPAR>
+<TK_NEWLINE>
+<TK_INT>
+<TK_ID, qwertyuiopasdfghjklzx">
+<TK_ID, cbnasdasd>
 <TK_NEWLINE>
 <TK_INT>
 <TK_ID, e>

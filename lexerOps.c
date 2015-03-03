@@ -35,6 +35,12 @@ void search(char c[],FILE *f)
       return;
     }
   }
+    
+  if(isalpha(c[0]) == 0)
+  {
+    printf("LEXICAL ERROR :\nInvalid character %s in line %d\n",c,line);
+    return;
+  }
 
   fprintf(f,"<TK_ID, %s>\n",c);
 }
@@ -165,8 +171,15 @@ void dfa()
             // c is not a symbol
               i++;j++;
             }
+
+            /* Error checking for max identifier length */
+            if(j > MAX_IDENTIFIER_LENGTH)
+            {
+              printf("LEXICAL ERROR :\nIdentifier length exceeds maximum allowed length in line %d\n",line);
+              break;
+            }
           }
-        
+
           search(new,o);
           state = start;
           shouldread = false;
@@ -233,8 +246,10 @@ void dfa()
           {
             i++;k++;
             c = str[i];
+
             if(isdigit(c) != 0 || c == 46)
-                num[k] = c;
+              num[k] = c;
+
             if(c==46)
             {
               // Decimal Point
@@ -243,6 +258,13 @@ void dfa()
               if(isdigit(c) != 0 || c == 46)
                 num[k] = c;
               floatingPoint = true;
+            }
+
+            /* Error checking for max string length */
+            if(k > MAX_NUMBER_LENGTH)
+            {
+              printf("LEXICAL ERROR :\nNumber length greater exceeds maximum allowed in line %d\n",line);
+              break;
             }
           }
           
@@ -298,10 +320,31 @@ void dfa()
             new[j] = str[i];
             i++;j++;
           
+            /* Error checking for matching quotes */
             if(str[i] == '\0')
             { 
               printf("LEXICAL ERROR :\nMatching quotes not present in line %d\n", line); 
               error = true;
+              break;
+            }
+
+            /* Error checking for max string length */
+            if(j > MAX_STRING_LENGTH)
+            {
+              bool quoteserror = false;
+              while(str[i] != '"')
+              {
+                if(str[i] == '\0')
+                {
+                  printf("LEXICAL ERROR :\nMatching quotes not present in line %d\n", line); 
+                  quoteserror = true;
+                  line++;
+                  break;
+                }
+                i++;
+              }
+              if(!quoteserror)
+                  printf("LEXICAL ERROR :\nString length exceeds maximum allowed length in line %d\n",line);
               break;
             }
           }
@@ -316,6 +359,7 @@ void dfa()
             state = start;
             shouldread = true;
             lastNewline = false;
+            lastComment = false;
             error = false;
             break;
           }

@@ -29,10 +29,9 @@ void dfa();
 
 int line = 1;
 
-// invalid chars : !,$ etc
+// ERROR TYPES
+// invalid chars : !,$ etc ab.c || ab@c DONE
 // 2 decimal points DONE
-// identifier length exceeds max
-// number length exceeds max
+// identifier/string/number length exceeds max DONE
 // 12abc DONE
-// ab.c || ab@c
 // Non matching "" DONE
