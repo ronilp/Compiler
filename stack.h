@@ -1,23 +1,23 @@
 typedef struct ArrayStack{
   int capacity;
   int top;
-  int *array;
+  char **array;
 }Stack;
 
-void printStack(Stack *S);
+extern void printStack(Stack *S);
 
-Stack *createStack();
+extern Stack *createStack();
 
-int isEmpty(Stack *S);
+extern int isEmpty(Stack *S);
 
-int isFull(Stack *S);
+extern int isFull(Stack *S);
 
-void deleteStack(Stack *S);
+extern void deleteStack(Stack *S);
 
-void doubleStack(Stack *S);
+extern void doubleStack(Stack *S);
 
-int Top(Stack *S);
+extern char *Top(Stack *S);
 
-void Push(Stack *S, int data);
+extern void Push(Stack *S, char *data);
 
-int Pop(Stack *S);
+extern char *Pop(Stack *S);

@@ -63,7 +63,7 @@ void dfa()
   bool flag = false, lastNewline = false, error = false, lastComment = true;
   FILE *f = fopen("errors.txt","r");
   //FILE *f = fopen("input.txt","r");
-  FILE *o = fopen("output.txt","w");
+  FILE *o = fopen("tokenstream.txt","w");
 
   while(1)
   { 

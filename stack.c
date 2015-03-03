@@ -1,14 +1,15 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<stdbool.h>
-#include"stack.h"
+#include<string.h>
+#include "stack.h"
 
 void printStack(Stack *S)
 {
   Stack *A = S;
   while(A->top!=-1)
   {
-    printf("%d ",A->array[A->top]);
+    printf("%s ",A->array[A->top]);
     A->top--;
   }
   printf("\n");
@@ -17,9 +18,9 @@ void printStack(Stack *S)
 Stack *createStack()  
 {
   Stack *S = malloc(sizeof(Stack));
-  S->capacity = 1;
+  S->capacity = 10;
   S->top = -1;
-  S->array = malloc(sizeof(int)*S->capacity);
+  S->array = malloc(sizeof(char *)*S->capacity);
   return S;
 }
 
@@ -55,31 +56,28 @@ void doubleStack(Stack *S)
   S->array = realloc(S->array,S->capacity);
 }
 
-int Top(Stack *S)
+char *Top(Stack *S)
 {
   if(!isEmpty(S))
-    return S->array[S->top];  
+    return S->array[S->top];
 }
 
-void Push(Stack *S, int data)
+void Push(Stack *S, char *data)
 {
   if(isFull(S))
     doubleStack(S);
   S->top++;
-  S->array[S->top] = data;
+  S->array[S->top] = malloc(sizeof(char)*strlen(data));
+  strcpy(S->array[S->top],data);
 }
 
-int Pop(Stack *S)
+char *Pop(Stack *S)
 {
   if(isEmpty(S))
   {
     printf("Stack Empty");
-    return -1;
+    return NULL;
   }
   else
-  {
-    int d = S->array[S->top];
-    S->top--;
-    return d;
-  }
+    return S->array[S->top--];
 }
