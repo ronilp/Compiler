@@ -93,18 +93,17 @@ void parse()
 
     ntpos = nonterminalPosition(Pop(S));
     tpos = terminalPosition(TokenStream[tokenIndex]);
-
+  
     ruleNumber = parseTable[ntpos][tpos];
 
     int j=0,i;
     char *nt;
     char rule[numTerminals + numNonTerminals][MAX_TERMINAL_SIZE];
-  
+
     char temp[100];
     strcpy(temp,Grammar[ruleNumber-1]);
-
-    nt = strtok(temp," \n");
     
+    nt = strtok(temp," \n");
     while(nt != NULL)
     {
       strcpy(rule[j],nt);
@@ -140,6 +139,8 @@ void parse()
   // tokenIndex should be = numTokens now
   if(tokenIndex == numTokens)
     printf("done\n");
+  else
+    printf("Parsing error\n");
 }
 
 int main()

@@ -15,8 +15,8 @@
 
 struct table
 {
-  char symbols[numTokens][MAX_IDENTIFIER_LENGTH];
-  char tokens[numTokens][MAX_IDENTIFIER_LENGTH];
+  char symbols[512][MAX_IDENTIFIER_LENGTH];
+  char tokens[512][MAX_IDENTIFIER_LENGTH];
 };
 
 struct table TokenTable;

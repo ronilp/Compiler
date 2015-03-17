@@ -8,12 +8,22 @@ void readTokens()
   int i=0; 
   FILE *f = fopen("tokenList.txt","r");
   int n = numTokens;
+  char sym[MAX_IDENTIFIER_LENGTH];
+  char tok[MAX_IDENTIFIER_LENGTH];
+  
   while(n > 0)
   {
-    fscanf(f,"%s %s",TokenTable.symbols[i],TokenTable.tokens[i]);
+    fscanf(f,"%s %s",sym,tok);
+    int key;
+    key = hash(sym);
+    
+    strcpy(TokenTable.symbols[key],sym);
+    strcpy(TokenTable.tokens[key],tok);
+    
     i++;
     n--;
   }
+  
   fclose(f);
 }
 
@@ -26,16 +36,16 @@ void search(char c[],FILE *f)
     fprintf(f,"<TK_STRINGLITERAL, %s>\n",c); 
     return;
   }
-  
-  for(i=0;i<numTokens;i++)
+
+  int key;
+  key = hash(c);
+
+  if(strcmp(c,TokenTable.symbols[key])==0)
   {
-    if(strcmp(c,TokenTable.symbols[i])==0)
-    {
-      fprintf(f,"<%s>\n",TokenTable.tokens[i]);
-      return;
-    }
+    fprintf(f,"<%s>\n",TokenTable.tokens[key]);
+    return;
   }
-    
+  
   if(isalpha(c[0]) == 0)
   {
     lexicalError = true;
@@ -54,6 +64,16 @@ void searchNumber(char c[], FILE *f, bool floatingPoint)
     fprintf(f,"<TK_FLOATLITERAL, %s>\n",c);
 }
 
+int hash(char c[])
+{
+  int i,sum=0;
+  for(i=0; i<strlen(c); i++)
+  {
+    sum += (i+1)*c[i];
+  }
+  return sum % 511;
+}
+
 void dfa()
 {
   int state = start;
@@ -61,7 +81,7 @@ void dfa()
   char str[BUFFER_LENGTH];
   char c;
   bool flag = false, lastNewline = false, error = false, lastComment = true;
-  FILE *f = fopen("errors.txt","r");
+  FILE *f = fopen("1.txt","r");
   //FILE *f = fopen("input.txt","r");
   FILE *o = fopen("tokenstream.txt","w");
 
