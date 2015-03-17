@@ -1,10 +1,10 @@
 #include "stack.h"
-#define numTerminals 5
-#define numNonTerminals 5
-#define numRules 8
+#define numTerminals 42
+#define numNonTerminals 47
+#define numRules 91
 #define MAX_TERMINAL_SIZE 100
 #define MAX_NONTERMINAL_SIZE 100
-#define MAX_RULE_LENGTH 100
+#define MAX_RULE_LENGTH 200
 #define MAX_NUM_TOKENS 1000
 #define MAX_TOKEN_LENGTH 100
 
@@ -22,10 +22,12 @@ extern void initialize();
 
 extern void parse();
 
+extern void parser();
+
 extern int terminalPosition(char *str);
 
 extern int nonterminalPosition(char *str);
 
-int numTokens = 0;
+//int tokenCount = 0;
 
-int tokenIndex = 0;
+//int tokenIndex = 0;

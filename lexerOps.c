@@ -3,6 +3,10 @@
 #include<stdbool.h>
 #include "lexer.h"
 
+int line = 1;
+
+bool lexicalError = false;
+
 void readTokens()
 {
   int i=0; 
@@ -33,7 +37,8 @@ void search(char c[],FILE *f)
   
   if(c[0] == '"')
   {
-    fprintf(f,"<TK_STRINGLITERAL, %s>\n",c); 
+    //fprintf(f,"<TK_STRINGLITERAL, %s>\n",c); 
+    fprintf(f,"TK_STRINGLITERAL\n"); 
     return;
   }
 
@@ -42,7 +47,8 @@ void search(char c[],FILE *f)
 
   if(strcmp(c,TokenTable.symbols[key])==0)
   {
-    fprintf(f,"<%s>\n",TokenTable.tokens[key]);
+    //fprintf(f,"<%s>\n",TokenTable.tokens[key]);
+    fprintf(f,"%s\n",TokenTable.tokens[key]);
     return;
   }
   
@@ -53,15 +59,18 @@ void search(char c[],FILE *f)
     return;
   }
 
-  fprintf(f,"<TK_ID, %s>\n",c);
+  //fprintf(f,"<TK_ID, %s>\n",c);
+  fprintf(f,"TK_ID\n");
 }
 
 void searchNumber(char c[], FILE *f, bool floatingPoint)
 {
   if(!floatingPoint)
-    fprintf(f,"<TK_INTEGERLITERAL, %s>\n",c);
+    //fprintf(f,"<TK_INTEGERLITERAL, %s>\n",c);
+    fprintf(f,"TK_INTEGERLITERAL\n");
   else
-    fprintf(f,"<TK_FLOATLITERAL, %s>\n",c);
+    //fprintf(f,"<TK_FLOATLITERAL, %s>\n",c);
+    fprintf(f,"FLOATLITERAL\n");
 }
 
 int hash(char c[])
@@ -432,9 +441,8 @@ void dfa()
   }
 }
 
-int main()
+void lexer()
 {
   readTokens();
   dfa();
-  return 0;  
 }

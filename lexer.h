@@ -1,4 +1,5 @@
 #include<string.h>
+#include<stdbool.h>
 #define numTokens 42
 #define start 0
 #define keyword_identifier 1
@@ -21,15 +22,17 @@ struct table
 
 struct table TokenTable;
 
-void readTokens();
+extern void readTokens();
 
-void search(char c[], FILE *f);
+extern void search(char c[], FILE *f);
 
-void dfa();
+extern void dfa();
 
-int line = 1;
+extern void lexer();
 
-bool lexicalError = false;
+//int line = 1;
+
+//bool lexicalError = false;
 
 // ERROR TYPES
 // invalid chars : !,$ etc ab.c || ab@c DONE
