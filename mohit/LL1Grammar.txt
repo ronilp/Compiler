@@ -1,6 +1,6 @@
 <program>               ==> <functions> <main_function>
-<functions>             ==> <function1> <functions> | e
-<function1>             ==> <function_signature> <function_body>
+<functions>             ==> <function1> TK_NEWLINE <functions> | e
+<function1>             ==> <function_signature> TK_NEWLINE <function_body>
 <function_signature>    ==> TK_FUNC <type> TK_ID TK_LPAR <params> TK_RPAR
 <type>                  ==> TK_VOID | TK_INT | TK_FLOAT | TK_PROTEIN | TK_SEQ
 <params>                ==> <param1> | e
@@ -17,13 +17,13 @@
 <array>                 ==> TK_ID <array1>
 <array1>                ==> <array> | e
 <IO>                    ==> TK_READ TK_LPAR <L> TK_RPAR TK_NEWLINE | TK_WRITE TK_LPAR <L> TK_RPAR TK_NEWLINE
-<L>                     ==> TK_ID <L1> 
+<L>                     ==> TK_ID <L1> | TK_STRINGLITERAL
 <L1>                    ==> TK_LSQBRAC TK_ID TK_RSQBRAC | e
-<loop>                  ==> TK_REPEAT TK_ID TK_FROM <Expr> TK_TO <Expr> TK_NEWLINE TK_LBRACE TK_NEWLINE <stmt> TK_NEWLINE TK_RBRACE TK_NEWLINE 
-<ifelse>                ==> TK_CONDITION TK_LPAR  <logicalexpr>  TK_RPAR  TK_NEWLINE TK_LBRACE TK_NEWLINE <stmt> TK_NEWLINE TK_RBRACE TK_NEWLINE <elseclause>
+<loop>                  ==> TK_REPEAT TK_ID TK_FROM <Expr> TK_TO <Expr> TK_NEWLINE TK_LBRACE TK_NEWLINE <stmt> TK_RBRACE TK_NEWLINE 
+<ifelse>                ==> TK_CONDITION TK_LPAR  <logicalexpr>  TK_RPAR  TK_NEWLINE TK_LBRACE TK_NEWLINE <stmt> TK_RBRACE TK_NEWLINE <elseclause>
 <elseclause>            ==> TK_OTHERWISE <otherwise1> | e
-<otherwise1>			==> <condition_otherwise> | TK_NEWLINE TK_LBRACE TK_NEWLINE <stmt> TK_NEWLINE TK_RBRACE TK_NEWLINE
-<condition_otherwise>   ==> TK_CONDITION  TK_LPAR  <logicalexpr>  TK_RPAR  TK_NEWLINE TK_LBRACE TK_NEWLINE <stmt> TK_NEWLINE TK_RBRACE TK_NEWLINE <elseclause>
+<otherwise1>			==> <condition_otherwise> | TK_NEWLINE TK_LBRACE TK_NEWLINE <stmt> TK_RBRACE TK_NEWLINE
+<condition_otherwise>   ==> TK_CONDITION  TK_LPAR  <logicalexpr>  TK_RPAR  TK_NEWLINE TK_LBRACE TK_NEWLINE <stmt> TK_RBRACE TK_NEWLINE <elseclause>
 <logicalexpr>           ==> <Expr> <relop> <Expr> <logicop>
 <relop>                 ==> TK_COMPARE | TK_GT | TK_LT | TK_NOTEQUAL
 <logicop>               ==> <lops> <logicalexpr> | e
@@ -40,7 +40,7 @@
 <mod1>                  ==> TK_MOD <mod> | e
 <mod>                   ==> <cut> <cut1>
 <cut1>                  ==> TK_CUT <cut> | e
-<cut>                   ==> TK_LITERAL | TK_FLOATLITERAL | TK_INTEGERLITERAL | TK_ID <ext> |  TK_LPAR  <Expr>  TK_RPAR  | TK_LENGTH <more>
+<cut>                   ==> TK_STRINGLITERAL | TK_FLOATLITERAL | TK_INTEGERLITERAL | TK_ID <ext> |  TK_LPAR  <Expr>  TK_RPAR  | TK_LENGTH <more>
 <ext>                   ==> <more> | TK_LSQBRAC TK_ID TK_RSQBRAC | e
 <more>                  ==> TK_LPAR  <more1>
 <more1>                 ==> TK_ID <args>  TK_RPAR  |  TK_RPAR 

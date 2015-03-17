@@ -1,7 +1,7 @@
 <functions> <main_function>
-<function1> <functions>
+<function1> TK_NEWLINE <functions>
 e
-<function_signature> <function_body>
+<function_signature> TK_NEWLINE <function_body>
 TK_FUNC <type> TK_ID TK_LPAR <params> TK_RPAR
 TK_VOID
 TK_INT

@@ -96,10 +96,7 @@ void parse()
   int ruleNumber;
   while(!isEmpty(S))
   {
-    char tk[MAX_TOKEN_LENGTH];
     int tpos,ntpos;
-
-    //strcpy(tk,Pop(S));
 
     //printf("Popped = %s\n",Top(S));
 
@@ -108,11 +105,6 @@ void parse()
   
     ruleNumber = parseTable[ntpos][tpos];
 
-    //if(iter > 450)
-    //{
-      //printf("paused due to probable stack overflow");
-      //break;
-    //}
     //printf("iter = %d, nt = %d | %s,tp = %d | %s, rule = %d\n",iter++,ntpos,nonterminal[ntpos],tpos,terminal[tpos],ruleNumber);
     int j=0,i;
     char *nt;

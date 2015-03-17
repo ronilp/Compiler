@@ -30,6 +30,9 @@ extern int nonterminalPosition(char *str);
 
 extern int hashNonTerminals(char str[]);
 
-//int tokenCount = 0;
-
-//int tokenIndex = 0;
+// Hashing - Mohit
+// < > handling
+// <TK_ID,abc> handling
+// lexer symbol table
+// parser symbol table
+// parse tree
