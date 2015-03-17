@@ -155,7 +155,7 @@ void parse()
         else if(strcmp(Top(S),TokenStream[tokenIndex]) == 0)
         {
           tokenIndex++;
-          printf("%d matched %s\n",matchcount++,Top(S));
+          //printf("%d matched %s\n",matchcount++,Top(S));
           Pop(S);
           //if(!isEmpty(S))
           //{
@@ -170,6 +170,8 @@ void parse()
           break;
           parseError = true;
         }
+        if(isEmpty(S))
+          break;
       }
     }
   }

@@ -12,4 +12,5 @@ main()
     write(c)
     write(" i*(j+3) = ")
     write(d)
+    return
 }
