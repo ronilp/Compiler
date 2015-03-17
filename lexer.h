@@ -30,6 +30,8 @@ extern void dfa();
 
 extern void lexer();
 
+extern int hash(char c[]);
+
 //int line = 1;
 
 //bool lexicalError = false;

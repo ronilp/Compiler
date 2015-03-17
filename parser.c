@@ -86,6 +86,7 @@ int nonterminalPosition(char *str)
 
 void parse()
 {
+  int matchcount = 1;
   int iter = 1;
   bool parseError = false;
 
@@ -100,41 +101,24 @@ void parse()
 
     //strcpy(tk,Pop(S));
 
-    printf("Popped = %s\n",Top(S));
+    //printf("Popped = %s\n",Top(S));
 
-    /*
-     If the token is a terminal 
-    while(terminalPosition(tk) != -1)
-    {
-      if(strcmp(tk,TokenStream[tokenIndex]) == 0)  
-      {
-        tokenIndex++;
-        strcpy(tk,Pop(S));
-      }
-      else
-      {
-        printf("PARSING ERROR :\n'%s' appeared when '%s' was expected!\n",TokenStream[tokenIndex],tk);
-        break;
-        parseError = true;
-      }
-    }
-*/
     ntpos = nonterminalPosition(Pop(S));
     tpos = terminalPosition(TokenStream[tokenIndex]);
   
     ruleNumber = parseTable[ntpos][tpos];
 
-    if(iter > 250)
-    {
-      printf("paused due to probable stack overflow");
-      break;  
-    }
-    printf("iter = %d, nt = %d,tp = %d, rule = %d\n",iter++,ntpos+1,tpos+1,ruleNumber+1);
+    //if(iter > 450)
+    //{
+      //printf("paused due to probable stack overflow");
+      //break;
+    //}
+    //printf("iter = %d, nt = %d | %s,tp = %d | %s, rule = %d\n",iter++,ntpos,nonterminal[ntpos],tpos,terminal[tpos],ruleNumber);
     int j=0,i;
     char *nt;
     char rule[numTerminals + numNonTerminals][MAX_TERMINAL_SIZE];
 
-    printf("tokensstream = %s, rule = %s",TokenStream[tokenIndex],Grammar[ruleNumber-2]);
+    //printf("tokens = %s, rule = %s",TokenStream[tokenIndex],Grammar[ruleNumber-1]);
 
     char temp[MAX_RULE_LENGTH];
     strcpy(temp,Grammar[ruleNumber-1]);
@@ -148,45 +132,45 @@ void parse()
     }
     j--;
 
-    printf("Pushed = ");
+    //printf("Pushed = ");
     while(j>-1)
     {
-      printf("%s ",rule[j]);
+      //printf("Pushed = ");
+      //printf("%s\n",rule[j]);
       Push(S,rule[j]);
       j--;
     }
-    printf("\n");
+    //printf("\n");
 
     if(!isEmpty(S))
     {
-      while(terminalPosition(Top(S)) != -1)
+      /* if Top(S) is a not a nonterminal */
+      while(nonterminalPosition(Top(S)) == -1)
       {
-        if(strcmp(Top(S),TokenStream[tokenIndex]) == 0)
+        if(strcmp(Top(S),"e") == 0)
         {
-          tokenIndex++;
-          printf("matched %s\n",Top(S));
+          //printf("Popped = %s\n",Top(S));
           Pop(S);
         }
-      }
-      
-      while(strcmp(Top(S),"e") == 0)
-        Pop(S);
-    //
-    if(!isEmpty(S))
-    {
-      while(terminalPosition(Top(S)) != -1)
-      {
-        if(strcmp(Top(S),TokenStream[tokenIndex]) == 0)
+        else if(strcmp(Top(S),TokenStream[tokenIndex]) == 0)
         {
           tokenIndex++;
-          printf("matched %s\n",Top(S));
+          printf("%d matched %s\n",matchcount++,Top(S));
           Pop(S);
+          //if(!isEmpty(S))
+          //{
+            //printf("next = %s\n",Top(S));  
+          //}
+          //else
+            //printf("stack empty");
         }
-        //else
-          //printf("MATCH ERROR\n");
+        else
+        {  
+          printf("PARSING ERROR :\n'%s' appeared when '%s' was expected!\n",TokenStream[tokenIndex],Top(S));
+          break;
+          parseError = true;
+        }
       }
-    }
-//
     }
   }
   // tokenIndex should be = numTokens now
@@ -194,6 +178,16 @@ void parse()
     printf("done\n");
   else
     printf("Parsing error\n");
+}
+
+int hashNonTerminals(char str[])
+{
+  int key,i;
+  for(i=0; i<strlen(str); i++)
+  {
+    key += i*str[i];
+  }
+  return key%511;  
 }
 
 void parser()

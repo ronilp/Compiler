@@ -28,6 +28,8 @@ extern int terminalPosition(char *str);
 
 extern int nonterminalPosition(char *str);
 
+extern int hashNonTerminals(char str[]);
+
 //int tokenCount = 0;
 
 //int tokenIndex = 0;

@@ -18,7 +18,7 @@ void printStack(Stack *S)
 Stack *createStack()  
 {
   Stack *S = malloc(sizeof(Stack));
-  S->capacity = 10;
+  S->capacity = 1000;
   S->top = -1;
   S->array = malloc(sizeof(char *)*S->capacity);
   return S;

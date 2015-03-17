@@ -4,7 +4,7 @@
 
 int main()
 {
-  //lexer();
+  lexer();
   parser();
   return 0;  
 }
