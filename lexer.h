@@ -1,14 +1,14 @@
 #include<string.h>
 #include<stdbool.h>
 #define numTokens 42
-#define start 0
-#define keyword_identifier 1
-#define symbol 2
-#define space 3
-#define newline 4
-#define number 5
-#define string_literal 6
-#define comment 7
+#define START 0
+#define KEYWORD_IDENTIFIER 1
+#define SYMBOL 2
+#define SPACE 3
+#define NEWLINE 4
+#define NUMBER 5
+#define STRING_LITERAL 6
+#define COMMENT 7
 #define MAX_STRING_LENGTH 200
 #define MAX_IDENTIFIER_LENGTH 200
 #define BUFFER_LENGTH 4096
@@ -24,7 +24,7 @@ struct table TokenTable;
 
 extern void readTokens();
 
-extern void search(char c[], FILE *f);
+extern void searchToken(char c[], FILE *f);
 
 extern void dfa();
 

@@ -2,6 +2,7 @@
 #include<string.h>
 #include<stdlib.h>
 #include<stdbool.h>
+#include <assert.h>
 #include "parser.h"
 
 int tokenCount = 0;
@@ -84,10 +85,58 @@ int nonterminalPosition(char *str)
   return -1;
 }
 
+char **split(char *a_str, const char a_delim)
+{
+    char **result    = 0;
+    size_t count     = 0;
+    char *tmp        = a_str;
+    char *last_comma = 0;
+    char delim[2];
+    delim[0] = a_delim;
+    delim[1] = 0;
+
+    /* Count how many elements will be extracted. */
+    while (*tmp)
+    {
+        if (a_delim == *tmp)
+        {
+            count++;
+            last_comma = tmp;
+        }
+        tmp++;
+    }
+
+    /* Add space for trailing token. */
+    count += last_comma < (a_str + strlen(a_str) - 1);
+
+    /* Add space for terminating null string so caller
+       knows where the list of returned strings ends. */
+    count++;
+
+    result = malloc(sizeof(char*) * count);
+
+    if (result)
+    {
+        size_t idx  = 0;
+        char* token = strtok(a_str, delim);
+
+        while (token)
+        {
+            assert(idx < count);
+            *(result + idx++) = strdup(token);
+            token = strtok(0, delim);
+        }
+        assert(idx == count - 1);
+        *(result + idx) = 0;
+    }
+
+    return result;
+}
+
 void parse()
 {
-  int matchcount = 1;
-  int iter = 1;
+  //int matchcount = 1;
+  //int iter = 1;
   bool parseError = false;
 
   Stack *S;
@@ -97,11 +146,27 @@ void parse()
   while(!isEmpty(S))
   {
     int tpos,ntpos;
+    char tk1[MAX_TOKEN_LENGTH];
+    char tk2[MAX_TOKEN_LENGTH];
 
     //printf("Popped = %s\n",Top(S));
 
-    ntpos = nonterminalPosition(Pop(S));
-    tpos = terminalPosition(TokenStream[tokenIndex]);
+    strcpy(tk1,Pop(S));
+    ntpos = nonterminalPosition(tk1);
+
+    if(strchr(TokenStream[tokenIndex],44) == NULL)
+        /* If comma not present in next token */
+    {
+      tpos = terminalPosition(TokenStream[tokenIndex]);  
+    }
+    else
+        /* If comma present in next token */
+    {  
+      char **stripped;
+      stripped = split(TokenStream[tokenIndex], ',');
+      strcpy(tk2,stripped[0]);
+      tpos = terminalPosition(tk2);
+    }
   
     ruleNumber = parseTable[ntpos][tpos];
 
@@ -124,7 +189,6 @@ void parse()
     }
     j--;
 
-    //printf("Pushed = ");
     while(j>-1)
     {
       //printf("Pushed = ");
@@ -149,12 +213,16 @@ void parse()
           tokenIndex++;
           //printf("%d matched %s\n",matchcount++,Top(S));
           Pop(S);
-          //if(!isEmpty(S))
-          //{
-            //printf("next = %s\n",Top(S));  
-          //}
-          //else
-            //printf("stack empty");
+        }
+        else if(strchr(TokenStream[tokenIndex],44) != NULL)
+        {    /* If comma present in next token */
+          char **stripped;
+          stripped = split(TokenStream[tokenIndex], ',');
+          strcpy(tk2,stripped[0]);
+          tpos = terminalPosition(tk2);
+          tokenIndex++;
+          //printf("%d matched %s\n",matchcount++,Top(S));
+          Pop(S);
         }
         else
         {  
@@ -169,9 +237,9 @@ void parse()
   }
   // tokenIndex should be = numTokens now
   if(tokenIndex == tokenCount)
-    printf("done\n");
+    printf("Parsing Complete\n");
   else
-    printf("Parsing error\n");
+    printf("Parsing Error\n");
 }
 
 int hashNonTerminals(char str[])

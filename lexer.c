@@ -31,7 +31,7 @@ void readTokens()
   fclose(f);
 }
 
-void search(char c[],FILE *f)
+void searchToken(char c[],FILE *f)
 {
   int i;
   
@@ -80,7 +80,7 @@ int hash(char c[])
 
 void dfa()
 {
-  int state = start;
+  int state = START;
   bool shouldread = true;
   char str[BUFFER_LENGTH];
   char c;
@@ -101,20 +101,20 @@ void dfa()
     {
       switch(state)
       {
-        case start:
+        case START:
         
           if(shouldread)
             c = str[i];
          
           if(c == '$')
           {
-            state = comment;
+            state = COMMENT;
             break;
           }
 
           if(c == '"')
           {
-            state = string_literal;
+            state = STRING_LITERAL;
             shouldread = true;
             break;
           }
@@ -123,9 +123,9 @@ void dfa()
           { 
             // space or newline
             if(c==10)
-              state = newline;
+              state = NEWLINE;
             else
-              state = space;
+              state = SPACE;
             shouldread = true;
             i++;
             break;
@@ -134,33 +134,33 @@ void dfa()
           if(isdigit(c)==0 && isalpha(c)==0)
           { 
             // Neither digit nor alphabet
-            state = symbol;
+            state = SYMBOL;
           }
           
           if(isdigit(c)!=0)
           {
             // Is a digit
-            state = number;
+            state = NUMBER;
           }
 
           if(isalpha(c)!=0)
           {
             // Starts with an alphabet
-            state = keyword_identifier;  
+            state = KEYWORD_IDENTIFIER;  
           }
           shouldread = false;
           break;
 
 
-        case symbol:
+        case SYMBOL:
            
           if(shouldread)
             c = str[i];
           if(c>32)
           {
-            search(&c,o);
+            searchToken(&c,o);
             shouldread = true;
-            state = start;
+            state = START;
           }
           i++; 
           lastNewline = false;
@@ -168,7 +168,7 @@ void dfa()
           break;
 
 
-        case keyword_identifier:
+        case KEYWORD_IDENTIFIER:
          
           i++;
           if(shouldread)
@@ -202,15 +202,15 @@ void dfa()
             }
           }
 
-          search(new,o);
-          state = start;
+          searchToken(new,o);
+          state = START;
           shouldread = false;
           lastNewline = false;
           lastComment = false;
           break;
 
 
-        case space:
+        case SPACE:
           
           i--;
           while(c<=32 && c!=10 && str[i] !='\0')
@@ -220,22 +220,22 @@ void dfa()
           }
           if(c==10)
           {
-            state = newline;
+            state = NEWLINE;
             i--;
           }
-          state = start;
+          state = START;
           shouldread = false;
           lastNewline = false;
           lastComment = false;
           break;
 
 
-        case newline:
+        case NEWLINE:
             
           line++;
           
           if(!lastNewline && !lastComment)
-            search("newline",o);
+            searchToken("newline",o);
           
           c = str[i];
             
@@ -250,13 +250,13 @@ void dfa()
           else
             lastNewline = false;
           
-          state = start;
+          state = START;
           shouldread = true;
           lastComment = false;
           break;
         
 
-        case number:
+        case NUMBER:
           
           i--;
           bool floatingPoint = false;
@@ -331,14 +331,14 @@ void dfa()
           if(!floaterror && !illegalnumber)
             searchNumber(num,o,floatingPoint);
           
-          state = start;
+          state = START;
           shouldread = false;
           lastNewline = false;
           lastComment = false;
           break;
 
 
-        case string_literal:
+        case STRING_LITERAL:
           
           memset(new,0,MAX_STRING_LENGTH);
           j=1;
@@ -387,11 +387,11 @@ void dfa()
           if(!error)
           {
             new[j] = c;
-            search(new,o);
+            searchToken(new,o);
           }
           else
           {
-            state = start;
+            state = START;
             shouldread = true;
             lastNewline = false;
             lastComment = false;
@@ -401,13 +401,13 @@ void dfa()
  
           i++;
           error = false;
-          state = start;
+          state = START;
           shouldread = true;
           lastNewline = false;
           lastComment = false;
           break;
 
-        case comment:
+        case COMMENT:
           
           while(str[i] != '\0')
             i++;
@@ -415,7 +415,7 @@ void dfa()
           if(str[i] == 10)
             line++;
           line++;
-          state = start;
+          state = START;
           shouldread = true;
           lastNewline = false;
           lastComment = true;

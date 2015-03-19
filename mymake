@@ -1,5 +1,5 @@
-compilerman : driver.o stack.o lexer.o parser.o
-	gcc -o compilerman driver.o stack.o lexer.o parser.o
+compilerman : driver.o stack.o lexer.o parser.o n-tree.o
+	gcc -o compilerman driver.o stack.o lexer.o parser.o n-tree.o
 
 driver.o : driver.c
 	gcc -c driver.c
@@ -12,3 +12,6 @@ lexer.o : lexer.c
 
 parser.o : parser.c
 	gcc -c parser.c
+	
+n-tree.o : n-tree.c
+	gcc -c n-tree.c

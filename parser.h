@@ -1,4 +1,5 @@
 #include "stack.h"
+#include "n-tree.h"
 #define numTerminals 42
 #define numNonTerminals 47
 #define numRules 91
@@ -28,7 +29,7 @@ extern int terminalPosition(char *str);
 
 extern int nonterminalPosition(char *str);
 
-extern int hashNonTerminals(char str[]);
+char **split(char *a_str, const char a_delim);
 
 // Hashing - Mohit
 // < > handling
