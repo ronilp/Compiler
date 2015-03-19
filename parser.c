@@ -2,8 +2,8 @@
 #include<string.h>
 #include<stdlib.h>
 #include<stdbool.h>
-#include <assert.h>
-#include "parser.h"
+#include<assert.h>
+#include"parser.h"
 
 int tokenCount = 0;
 
@@ -86,50 +86,49 @@ int nonterminalPosition(char *str)
 
 char **split(char *a_str, const char a_delim)
 {
-    char **result    = 0;
-    size_t count     = 0;
-    char *tmp        = a_str;
-    char *last_comma = 0;
-    char delim[2];
-    delim[0] = a_delim;
-    delim[1] = 0;
+  char **result    = 0;
+  size_t count     = 0;
+  char *tmp        = a_str;
+  char *last_comma = 0;
+  char delim[2];
+  delim[0] = a_delim;
+  delim[1] = 0;
 
-    /* Count how many elements will be extracted. */
-    while (*tmp)
+  /* Count how many elements will be extracted. */
+  while (*tmp)
+  {
+    if (a_delim == *tmp)
     {
-        if (a_delim == *tmp)
-        {
-            count++;
-            last_comma = tmp;
-        }
-        tmp++;
+      count++;
+      last_comma = tmp;
     }
+    tmp++;
+  }
 
-    /* Add space for trailing token. */
-    count += last_comma < (a_str + strlen(a_str) - 1);
+  /* Add space for trailing token. */
+  count += last_comma < (a_str + strlen(a_str) - 1);
 
-    /* Add space for terminating null string so caller
-       knows where the list of returned strings ends. */
-    count++;
+  /* Add space for terminating null string so caller
+     knows where the list of returned strings ends. */
+  count++;
 
-    result = malloc(sizeof(char*) * count);
+  result = malloc(sizeof(char*) * count);
 
-    if (result)
+  if(result)
+  {
+    size_t idx  = 0;
+    char* token = strtok(a_str, delim);
+
+    while(token)
     {
-        size_t idx  = 0;
-        char* token = strtok(a_str, delim);
-
-        while (token)
-        {
-            assert(idx < count);
-            *(result + idx++) = strdup(token);
-            token = strtok(0, delim);
-        }
-        assert(idx == count - 1);
-        *(result + idx) = 0;
+      assert(idx < count);
+      *(result + idx++) = strdup(token);
+      token = strtok(0, delim);
     }
-
-    return result;
+    assert(idx == count - 1);
+    *(result + idx) = 0;
+  }
+  return result;
 }
 
 void parse()
@@ -141,29 +140,36 @@ void parse()
   Stack *S;
   S = createStack();
   Push(S,nonterminal[0]);
-  
+  root = createNode(nonterminal[0]);
+  printf("root = %s\n",root->data);
+
   int ruleNumber;
+  struct tree *current = root;
 
   while(!isEmpty(S))
   {
     int tpos,ntpos;
     char tk1[MAX_TOKEN_LENGTH];
     char tk2[MAX_TOKEN_LENGTH];
+    char **stripped;
+    char tkn[MAX_TOKEN_LENGTH];
 
     //printf("Popped = %s\n",Top(S));
 
     strcpy(tk1,Pop(S));
     ntpos = nonterminalPosition(tk1);
+    //current = createNode(tk1);
 
     if(strchr(TokenStream[tokenIndex],44) == NULL)
     {   /* If comma not present in next token */
-      tpos = terminalPosition(TokenStream[tokenIndex]);  
+      tpos = terminalPosition(TokenStream[tokenIndex]);
     }
     else
     {   /* If comma present in next token */  
-      char **stripped;
       stripped = split(TokenStream[tokenIndex], ',');
       strcpy(tk2,stripped[0]);
+      strcpy(tkn,stripped[1]);
+      //printf("stripped[1] = %s\n",stripped[1]);
       tpos = terminalPosition(tk2);
     }
   
@@ -183,11 +189,48 @@ void parse()
     while(nt != NULL)
     {
       strcpy(rule[j],nt);
-      //printf("%s\n",rule[j]);
       nt = strtok(NULL," \n");
       j++;
     }
     j--;
+    
+    current = setChildren(current,j+1);
+    //printf("current = %s, children set = %d\n",current->data,j+1);
+
+    char commas[4][MAX_TOKEN_LENGTH];
+    strcpy(commas[0],"TK_ID");
+    strcpy(commas[1],"TK_STRINGLITERAL");
+    strcpy(commas[2],"TK_FLOATLITERAL");
+    strcpy(commas[3],"TK_INTEGERLITERAL");
+
+    int k=j;
+    for(k=0; k<=j; k++)
+    {
+      if((strcmp(rule[k],commas[0]) == 0) || (strcmp(rule[k],commas[1]) == 0) || (strcmp(rule[k],commas[2]) == 0) || (strcmp(rule[k],commas[3]) == 0))
+      {
+        insert(current,tkn);
+      }
+      else
+      {
+        insert(current,rule[k]);
+      }
+      //printf("inserted %s in %s\n",rule[k],current->data);
+    }
+    //printf("\n");
+    if(current->child[0] != NULL)
+      current = current->child[0];
+
+    while(1)
+    {
+      if(nonterminalPosition(current->data) != -1)
+      { /* if current is a nonterminal */
+        break;
+      }
+      else
+      {
+        current = getNextPreorder(current);
+      }
+    }
 
     while(j>-1)
     {
@@ -242,6 +285,7 @@ void parse()
   {
     while(tokenIndex != tokenCount)
     {
+      printf("last error\n");
       if(strcmp(TokenStream[tokenIndex],"TK_NEWLINE"))
         tokenIndex++;
       else
@@ -273,5 +317,6 @@ int hashTerminals(char str[])
 void parser()
 {
   initialize();
-  parse();  
+  parse(); 
+  preorder(root);
 }

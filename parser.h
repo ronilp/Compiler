@@ -35,6 +35,8 @@ extern int nonterminalPosition(char *str);
 
 char **split(char *a_str, const char a_delim);
 
+struct tree *root;
+
 // Hashing - Mohit -- DONE
 // < > handling -- DONE
 // <TK_ID,abc> handling  -- DONE

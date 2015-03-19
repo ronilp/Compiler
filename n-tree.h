@@ -16,3 +16,5 @@ extern struct tree *createNode(char *data);
 extern struct tree *insert(struct tree *parent, char *data);
 
 extern struct tree *setChildren(struct tree *parent, int children);
+
+struct tree *getNextPreorder(struct tree *p);

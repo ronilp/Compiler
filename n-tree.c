@@ -13,19 +13,24 @@ void preorder(struct tree *p)
     preorder(p->child[i]);
 }
 
-/*
-struct tree *search(struct tree* root,char *data)
+struct tree *getNextPreorder(struct tree *p)
 {
-  if(root == NULL)
-    return;
-  if(strcmp(data,root->data) == 0)
-    return root;
-  struct tree *t = search(root->child,data);
-  if(t == NULL)
-     t = search(root->sibling,data);
-  return t;
+  if(p->parent != NULL)
+  {
+    while((p->parent != NULL) && (p->childID == p->parent->children))
+    {
+      if(p->parent != NULL)
+        p = p->parent;
+    }
+  }
+  int temp;
+  temp = p->childID;
+  if(p->parent == NULL)
+    return p;  
+  else
+    p = p->parent->child[temp];
+  return p;  
 }
-*/
 
 struct tree *createNode(char *data)
 {
@@ -80,7 +85,7 @@ struct tree *insert(struct tree *parent, char *data)
   struct tree *new = NULL;
   new = createNode(data);
   parent->child[i] = new;
-  parent->child[i]->childID = i;
+  parent->child[i]->childID = i+1;
   parent->child[i]->parent = parent;
   return parent;
 }

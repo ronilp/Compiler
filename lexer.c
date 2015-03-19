@@ -85,7 +85,7 @@ void dfa()
   char str[BUFFER_LENGTH];
   char c;
   bool flag = false, lastNewline = false, error = false, lastComment = true;
-  FILE *f = fopen("1.txt","r");
+  FILE *f = fopen("2.txt","r");
   FILE *o = fopen("tokenstream.txt","w");
 
   while(1)

@@ -1,0 +1,16 @@
+main()
+{
+    int i
+    int j
+    read(i)
+    read(j) 
+    int c
+    int d
+    c is i*j + 3
+    d is i*(j + 3)
+    write("Precedence check : i*j+3 = ")
+    write(c)
+    write(" i*(j+3) = ")
+    write(d)
+    return
+}
