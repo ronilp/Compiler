@@ -5,13 +5,15 @@
 
 void preorder(struct tree *p)
 {
+  int i;
   if(p == NULL)
     return;
   printf("%s ",p->data);
-  preorder(p->child);
-  preorder(p->sibling);
+  for(i=0; i<p->children; i++)
+    preorder(p->child[i]);
 }
 
+/*
 struct tree *search(struct tree* root,char *data)
 {
   if(root == NULL)
@@ -23,54 +25,80 @@ struct tree *search(struct tree* root,char *data)
      t = search(root->sibling,data);
   return t;
 }
+*/
 
 struct tree *createNode(char *data)
 {
-  struct tree *newnode = (struct tree*)malloc(sizeof(struct tree));
+  struct tree *newnode = (struct tree *)malloc(sizeof(struct tree));
   newnode->child = NULL;
-  newnode->sibling = NULL;
+  newnode->parent = NULL;
   newnode->data = malloc(sizeof(char)*100);
   strcpy(newnode->data,data);
+  newnode->children = 0;
+  newnode->childID = 1;
   return newnode;
 }
 
-struct tree *insert(struct tree *root, char *parent, char *data)
+struct tree *setChildren(struct tree *parent, int children)
 {
-  struct tree *p = search(root,parent);
-
-  if(p == NULL)
+  if(parent == NULL)
   {
-    p = createNode(data);
-    return p;
+    printf("The parent whose children you are trying to set doesnot exists\n");
+    return NULL;
   }
 
-  if(p->child == NULL)
+  int i;
+  parent->children = children;
+  parent->child = malloc(sizeof(struct tree *)*children);
+  
+  for(i=0; i<children; i++)
+    parent->child[i] = NULL;
+  
+  if(parent->child == NULL)
+    printf("Error allocating memory for children\n");
+  return parent;
+}
+
+struct tree *insert(struct tree *parent, char *data)
+{
+  if(parent == NULL)
   {
-    p->child = createNode(data);
+    parent = createNode(data);
+    return parent;
   }
+
+  int i=0;
+
+  if(parent->child == NULL)
+    parent = setChildren(parent,20);
   else
   {
-    while(p->sibling != NULL)
-      p = p->sibling;
-    
-    p->sibling = createNode(data);
-  } 
-  return root;
+    while(parent->child[i] != NULL)
+      i++;
+  }
+
+  struct tree *new = NULL;
+  new = createNode(data);
+  parent->child[i] = new;
+  parent->child[i]->childID = i;
+  parent->child[i]->parent = parent;
+  return parent;
 }
 
 /*
+struct tree *root = NULL;
+
 void main()
 {
-  struct tree *root=NULL;
-  
-  root = insert(root," ","A");
-  root = insert(root,"A","E");
-  root = insert(root,"A","B");
-  root = insert(root,"A","F");
-  root = insert(root,"B","C");
-  root = insert(root,"C","G");
-  root = insert(root,"G","H");
-  root = insert(root,"F","D");
+  root = createNode("A");
+  insert(root,"E");
+  insert(root,"B");
+  insert(root,"F");
+
+  insert(root->child[1],"C");
+  insert(root->child[1]->child[0],"G");
+  insert(root->child[1]->child[0]->child[0],"H");
+  insert(root->child[2],"D");
 
   preorder(root);
 }

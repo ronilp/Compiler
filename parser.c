@@ -141,7 +141,9 @@ void parse()
   Stack *S;
   S = createStack();
   Push(S,nonterminal[0]);
+  
   int ruleNumber;
+
   while(!isEmpty(S))
   {
     int tpos,ntpos;
@@ -154,13 +156,11 @@ void parse()
     ntpos = nonterminalPosition(tk1);
 
     if(strchr(TokenStream[tokenIndex],44) == NULL)
-        /* If comma not present in next token */
-    {
+    {   /* If comma not present in next token */
       tpos = terminalPosition(TokenStream[tokenIndex]);  
     }
     else
-        /* If comma present in next token */
-    {  
+    {   /* If comma present in next token */  
       char **stripped;
       stripped = split(TokenStream[tokenIndex], ',');
       strcpy(tk2,stripped[0]);
@@ -183,6 +183,7 @@ void parse()
     while(nt != NULL)
     {
       strcpy(rule[j],nt);
+      //printf("%s\n",rule[j]);
       nt = strtok(NULL," \n");
       j++;
     }
@@ -238,7 +239,15 @@ void parse()
   if(tokenIndex == tokenCount)
     printf("Parsing Complete\n");
   else
-    printf("Parsing Error\n");
+  {
+    while(tokenIndex != tokenCount)
+    {
+      if(strcmp(TokenStream[tokenIndex],"TK_NEWLINE"))
+        tokenIndex++;
+      else
+        printf("Parsing Error\n");
+    }
+  }
 }
 
 int hashNonTerminals(char str[])
