@@ -20,8 +20,8 @@ main()
     write(" Sum of 2nd Array = ")
     write(d)
     write("Total Sum = ")
-    int e
-    e is sumA + sumB
-    write(e)
+    int z
+    z is sumA + sumB
+    write(z)
     return
 }

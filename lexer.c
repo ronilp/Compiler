@@ -37,8 +37,7 @@ void search(char c[],FILE *f)
   
   if(c[0] == '"')
   {
-    //fprintf(f,"<TK_STRINGLITERAL, %s>\n",c); 
-    fprintf(f,"TK_STRINGLITERAL\n"); 
+    fprintf(f,"TK_STRINGLITERAL,%s\n",c); 
     return;
   }
 
@@ -47,7 +46,6 @@ void search(char c[],FILE *f)
 
   if(strcmp(c,TokenTable.symbols[key])==0)
   {
-    //fprintf(f,"<%s>\n",TokenTable.tokens[key]);
     fprintf(f,"%s\n",TokenTable.tokens[key]);
     return;
   }
@@ -59,18 +57,15 @@ void search(char c[],FILE *f)
     return;
   }
 
-  //fprintf(f,"<TK_ID, %s>\n",c);
-  fprintf(f,"TK_ID\n");
+  fprintf(f,"TK_ID,%s,%d\n",c,line);
 }
 
 void searchNumber(char c[], FILE *f, bool floatingPoint)
 {
   if(!floatingPoint)
-    //fprintf(f,"<TK_INTEGERLITERAL, %s>\n",c);
-    fprintf(f,"TK_INTEGERLITERAL\n");
+    fprintf(f,"TK_INTEGERLITERAL,%s\n",c);
   else
-    //fprintf(f,"<TK_FLOATLITERAL, %s>\n",c);
-    fprintf(f,"FLOATLITERAL\n");
+    fprintf(f,"FLOATLITERAL,%s\n",c);
 }
 
 int hash(char c[])
@@ -91,7 +86,6 @@ void dfa()
   char c;
   bool flag = false, lastNewline = false, error = false, lastComment = true;
   FILE *f = fopen("1.txt","r");
-  //FILE *f = fopen("input.txt","r");
   FILE *o = fopen("tokenstream.txt","w");
 
   while(1)
@@ -445,4 +439,11 @@ void lexer()
 {
   readTokens();
   dfa();
+}
+
+int main()
+{
+  readTokens();
+  dfa();
+  return 0;  
 }
