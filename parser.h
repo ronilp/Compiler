@@ -27,13 +27,17 @@ extern void parser();
 
 extern int terminalPosition(char *str);
 
+int hashNonTerminals(char str[]);
+
+int hashTerminals(char str[]);
+
 extern int nonterminalPosition(char *str);
 
 char **split(char *a_str, const char a_delim);
 
-// Hashing - Mohit
-// < > handling
-// <TK_ID,abc> handling
+// Hashing - Mohit -- DONE
+// < > handling -- DONE
+// <TK_ID,abc> handling  -- DONE
 // lexer symbol table
 // parser symbol table
 // parse tree

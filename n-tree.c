@@ -1,39 +1,40 @@
 #include<stdio.h>
 #include<stdlib.h>
+#include<string.h>
 #include "n-tree.h"
 
-void preorder(struct tree*p)
+void preorder(struct tree *p)
 {
   if(p == NULL)
     return;
-  printf("%d ",p->data);
+  printf("%s ",p->data);
   preorder(p->child);
   preorder(p->sibling);
 }
 
-struct tree *search(struct tree* root,int data)
+struct tree *search(struct tree* root,char *data)
 {
   if(root == NULL)
     return;
-  if(data == root->data)
+  if(strcmp(data,root->data) == 0)
     return root;
   struct tree *t = search(root->child,data);
   if(t == NULL)
      t = search(root->sibling,data);
   return t;
-
 }
 
-struct tree *createNode(int data)
+struct tree *createNode(char *data)
 {
   struct tree *newnode = (struct tree*)malloc(sizeof(struct tree));
   newnode->child = NULL;
   newnode->sibling = NULL;
-  newnode->data = data;
+  newnode->data = malloc(sizeof(char)*100);
+  strcpy(newnode->data,data);
   return newnode;
 }
 
-struct tree *insert(struct tree *root, int parent, int data)
+struct tree *insert(struct tree *root, char *parent, char *data)
 {
   struct tree *p = search(root,parent);
 
@@ -62,14 +63,14 @@ void main()
 {
   struct tree *root=NULL;
   
-  root = insert(root,0,1);
-  root = insert(root,1,5);
-  root = insert(root,1,2);
-  root = insert(root,1,6);
-  root = insert(root,2,3);
-  root = insert(root,3,7);
-  root = insert(root,7,8);
-  root = insert(root,6,4);
+  root = insert(root," ","A");
+  root = insert(root,"A","E");
+  root = insert(root,"A","B");
+  root = insert(root,"A","F");
+  root = insert(root,"B","C");
+  root = insert(root,"C","G");
+  root = insert(root,"G","H");
+  root = insert(root,"F","D");
 
   preorder(root);
 }

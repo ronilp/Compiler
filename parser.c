@@ -16,7 +16,6 @@ void initialize()
   FILE *fp3 = fopen("tableparse.txt","r");
   FILE *fp4 = fopen("grammar.txt","r");
   FILE *fp5 = fopen("tokenstream.txt","r");
-  FILE *fpn = fopen("fn.txt","w");
 
   if(fp1 == NULL || fp2 == NULL || fp3 == NULL || fp4 == NULL || fp5 == NULL)
   {
@@ -243,6 +242,16 @@ void parse()
 }
 
 int hashNonTerminals(char str[])
+{
+  int key,i;
+  for(i=0; i<strlen(str); i++)
+  {
+    key += i*str[i];
+  }
+  return key%511;  
+}
+
+int hashTerminals(char str[])
 {
   int key,i;
   for(i=0; i<strlen(str); i++)
