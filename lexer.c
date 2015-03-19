@@ -440,10 +440,11 @@ void lexer()
   readTokens();
   dfa();
 }
-
+/*
 int main()
 {
   readTokens();
   dfa();
   return 0;  
 }
+*/
