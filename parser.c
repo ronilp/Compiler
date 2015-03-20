@@ -141,7 +141,10 @@ void parse()
   S = createStack();
   Push(S,nonterminal[0]);
   root = createNode(nonterminal[0]);
-  printf("root = %s\n",root->data);
+
+  FILE *f1 = fopen("parsetree.txt","w");
+
+  fprintf(f1,"root = %s\n",root->data);
 
   int ruleNumber;
   struct tree *current = root;
@@ -158,7 +161,6 @@ void parse()
 
     strcpy(tk1,Pop(S));
     ntpos = nonterminalPosition(tk1);
-    //current = createNode(tk1);
 
     if(strchr(TokenStream[tokenIndex],44) == NULL)
     {   /* If comma not present in next token */
@@ -208,15 +210,16 @@ void parse()
     {
       if((strcmp(rule[k],commas[0]) == 0) || (strcmp(rule[k],commas[1]) == 0) || (strcmp(rule[k],commas[2]) == 0) || (strcmp(rule[k],commas[3]) == 0))
       {
-        insert(current,tkn);
+        insert(current,tkn,j+1);
+        fprintf(f1,"inserted %s in %s\n",tkn,current->data);
       }
       else
       {
-        insert(current,rule[k]);
+        insert(current,rule[k],j+1);
+        fprintf(f1,"inserted %s in %s\n",rule[k],current->data);
       }
-      //printf("inserted %s in %s\n",rule[k],current->data);
     }
-    //printf("\n");
+    fprintf(f1,"----------------------------------\n");
     if(current->child[0] != NULL)
       current = current->child[0];
 
@@ -318,5 +321,7 @@ void parser()
 {
   initialize();
   parse(); 
-  //preorder(root);
+  FILE *f = fopen("parsetreetraversal.txt","w");
+  fprintf(f,"PREORDER TRAVERSAL\n");
+  preorder(root,f);
 }

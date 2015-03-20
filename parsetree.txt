@@ -1,0 +1,353 @@
+root = <program>
+inserted <functions> in <program>
+inserted <main_function> in <program>
+----------------------------------
+inserted e in <functions>
+----------------------------------
+inserted TK_MAIN in <main_function>
+inserted TK_LPAR in <main_function>
+inserted TK_RPAR in <main_function>
+inserted TK_NEWLINE in <main_function>
+inserted <function_body> in <main_function>
+----------------------------------
+inserted TK_LBRACE in <function_body>
+inserted TK_NEWLINE in <function_body>
+inserted <stmt> in <function_body>
+inserted TK_RETURN in <function_body>
+inserted <Expr1> in <function_body>
+inserted TK_NEWLINE in <function_body>
+inserted TK_RBRACE in <function_body>
+----------------------------------
+inserted <type> in <stmt>
+inserted  in <stmt>
+inserted <squarebracket> in <stmt>
+inserted TK_NEWLINE in <stmt>
+inserted <stmt> in <stmt>
+----------------------------------
+inserted TK_INT in <type>
+----------------------------------
+inserted e in <squarebracket>
+----------------------------------
+inserted <type> in <stmt>
+inserted  in <stmt>
+inserted <squarebracket> in <stmt>
+inserted TK_NEWLINE in <stmt>
+inserted <stmt> in <stmt>
+----------------------------------
+inserted TK_INT in <type>
+----------------------------------
+inserted e in <squarebracket>
+----------------------------------
+inserted <IO> in <stmt>
+inserted <stmt> in <stmt>
+----------------------------------
+inserted TK_READ in <IO>
+inserted TK_LPAR in <IO>
+inserted <L> in <IO>
+inserted TK_RPAR in <IO>
+inserted TK_NEWLINE in <IO>
+----------------------------------
+inserted i in <L>
+inserted <L1> in <L>
+----------------------------------
+inserted e in <L1>
+----------------------------------
+inserted <IO> in <stmt>
+inserted <stmt> in <stmt>
+----------------------------------
+inserted TK_READ in <IO>
+inserted TK_LPAR in <IO>
+inserted <L> in <IO>
+inserted TK_RPAR in <IO>
+inserted TK_NEWLINE in <IO>
+----------------------------------
+inserted j in <L>
+inserted <L1> in <L>
+----------------------------------
+inserted e in <L1>
+----------------------------------
+inserted <type> in <stmt>
+inserted j in <stmt>
+inserted <squarebracket> in <stmt>
+inserted TK_NEWLINE in <stmt>
+inserted <stmt> in <stmt>
+----------------------------------
+inserted TK_INT in <type>
+----------------------------------
+inserted e in <squarebracket>
+----------------------------------
+inserted <type> in <stmt>
+inserted j in <stmt>
+inserted <squarebracket> in <stmt>
+inserted TK_NEWLINE in <stmt>
+inserted <stmt> in <stmt>
+----------------------------------
+inserted TK_INT in <type>
+----------------------------------
+inserted e in <squarebracket>
+----------------------------------
+inserted c in <stmt>
+inserted <X> in <stmt>
+----------------------------------
+inserted TK_ASSIGNOP in <X>
+inserted <stmt1> in <X>
+inserted TK_NEWLINE in <X>
+inserted <stmt> in <X>
+----------------------------------
+inserted <Expr> in <stmt1>
+----------------------------------
+inserted <Expr2> in <Expr>
+inserted <Expr3> in <Expr>
+----------------------------------
+inserted <mulexp> in <Expr2>
+inserted <mulexp1> in <Expr2>
+----------------------------------
+inserted <divexp> in <mulexp>
+inserted <divexp1> in <mulexp>
+----------------------------------
+inserted <mod> in <divexp>
+inserted <mod1> in <divexp>
+----------------------------------
+inserted <cut> in <mod>
+inserted <cut1> in <mod>
+----------------------------------
+inserted i in <cut>
+inserted <ext> in <cut>
+----------------------------------
+inserted e in <ext>
+----------------------------------
+inserted e in <cut1>
+----------------------------------
+inserted e in <mod1>
+----------------------------------
+inserted e in <divexp1>
+----------------------------------
+inserted TK_MULTIPLY in <mulexp1>
+inserted <mulexp> in <mulexp1>
+----------------------------------
+inserted <divexp> in <mulexp>
+inserted <divexp1> in <mulexp>
+----------------------------------
+inserted <mod> in <divexp>
+inserted <mod1> in <divexp>
+----------------------------------
+inserted <cut> in <mod>
+inserted <cut1> in <mod>
+----------------------------------
+inserted j in <cut>
+inserted <ext> in <cut>
+----------------------------------
+inserted e in <ext>
+----------------------------------
+inserted e in <cut1>
+----------------------------------
+inserted e in <mod1>
+----------------------------------
+inserted e in <divexp1>
+----------------------------------
+inserted <AS> in <Expr3>
+inserted <Expr> in <Expr3>
+----------------------------------
+inserted TK_PLUS in <AS>
+----------------------------------
+inserted <Expr2> in <Expr>
+inserted <Expr3> in <Expr>
+----------------------------------
+inserted <mulexp> in <Expr2>
+inserted <mulexp1> in <Expr2>
+----------------------------------
+inserted <divexp> in <mulexp>
+inserted <divexp1> in <mulexp>
+----------------------------------
+inserted <mod> in <divexp>
+inserted <mod1> in <divexp>
+----------------------------------
+inserted <cut> in <mod>
+inserted <cut1> in <mod>
+----------------------------------
+inserted 3 in <cut>
+----------------------------------
+inserted e in <cut1>
+----------------------------------
+inserted e in <mod1>
+----------------------------------
+inserted e in <divexp1>
+----------------------------------
+inserted e in <mulexp1>
+----------------------------------
+inserted e in <Expr3>
+----------------------------------
+inserted d in <stmt>
+inserted <X> in <stmt>
+----------------------------------
+inserted TK_ASSIGNOP in <X>
+inserted <stmt1> in <X>
+inserted TK_NEWLINE in <X>
+inserted <stmt> in <X>
+----------------------------------
+inserted <Expr> in <stmt1>
+----------------------------------
+inserted <Expr2> in <Expr>
+inserted <Expr3> in <Expr>
+----------------------------------
+inserted <mulexp> in <Expr2>
+inserted <mulexp1> in <Expr2>
+----------------------------------
+inserted <divexp> in <mulexp>
+inserted <divexp1> in <mulexp>
+----------------------------------
+inserted <mod> in <divexp>
+inserted <mod1> in <divexp>
+----------------------------------
+inserted <cut> in <mod>
+inserted <cut1> in <mod>
+----------------------------------
+inserted i in <cut>
+inserted <ext> in <cut>
+----------------------------------
+inserted e in <ext>
+----------------------------------
+inserted e in <cut1>
+----------------------------------
+inserted e in <mod1>
+----------------------------------
+inserted e in <divexp1>
+----------------------------------
+inserted TK_MULTIPLY in <mulexp1>
+inserted <mulexp> in <mulexp1>
+----------------------------------
+inserted <divexp> in <mulexp>
+inserted <divexp1> in <mulexp>
+----------------------------------
+inserted <mod> in <divexp>
+inserted <mod1> in <divexp>
+----------------------------------
+inserted <cut> in <mod>
+inserted <cut1> in <mod>
+----------------------------------
+inserted TK_LPAR in <cut>
+inserted <Expr> in <cut>
+inserted TK_RPAR in <cut>
+----------------------------------
+inserted <Expr2> in <Expr>
+inserted <Expr3> in <Expr>
+----------------------------------
+inserted <mulexp> in <Expr2>
+inserted <mulexp1> in <Expr2>
+----------------------------------
+inserted <divexp> in <mulexp>
+inserted <divexp1> in <mulexp>
+----------------------------------
+inserted <mod> in <divexp>
+inserted <mod1> in <divexp>
+----------------------------------
+inserted <cut> in <mod>
+inserted <cut1> in <mod>
+----------------------------------
+inserted j in <cut>
+inserted <ext> in <cut>
+----------------------------------
+inserted e in <ext>
+----------------------------------
+inserted e in <cut1>
+----------------------------------
+inserted e in <mod1>
+----------------------------------
+inserted e in <divexp1>
+----------------------------------
+inserted e in <mulexp1>
+----------------------------------
+inserted <AS> in <Expr3>
+inserted <Expr> in <Expr3>
+----------------------------------
+inserted TK_PLUS in <AS>
+----------------------------------
+inserted <Expr2> in <Expr>
+inserted <Expr3> in <Expr>
+----------------------------------
+inserted <mulexp> in <Expr2>
+inserted <mulexp1> in <Expr2>
+----------------------------------
+inserted <divexp> in <mulexp>
+inserted <divexp1> in <mulexp>
+----------------------------------
+inserted <mod> in <divexp>
+inserted <mod1> in <divexp>
+----------------------------------
+inserted <cut> in <mod>
+inserted <cut1> in <mod>
+----------------------------------
+inserted 3 in <cut>
+----------------------------------
+inserted e in <cut1>
+----------------------------------
+inserted e in <mod1>
+----------------------------------
+inserted e in <divexp1>
+----------------------------------
+inserted e in <mulexp1>
+----------------------------------
+inserted e in <Expr3>
+----------------------------------
+inserted e in <cut1>
+----------------------------------
+inserted e in <mod1>
+----------------------------------
+inserted e in <divexp1>
+----------------------------------
+inserted e in <Expr3>
+----------------------------------
+inserted <IO> in <stmt>
+inserted <stmt> in <stmt>
+----------------------------------
+inserted TK_WRITE in <IO>
+inserted TK_LPAR in <IO>
+inserted <L> in <IO>
+inserted TK_RPAR in <IO>
+inserted TK_NEWLINE in <IO>
+----------------------------------
+inserted "Precedence check : i*j+3 = " in <L>
+----------------------------------
+inserted <IO> in <stmt>
+inserted <stmt> in <stmt>
+----------------------------------
+inserted TK_WRITE in <IO>
+inserted TK_LPAR in <IO>
+inserted <L> in <IO>
+inserted TK_RPAR in <IO>
+inserted TK_NEWLINE in <IO>
+----------------------------------
+inserted c in <L>
+inserted <L1> in <L>
+----------------------------------
+inserted e in <L1>
+----------------------------------
+inserted <IO> in <stmt>
+inserted <stmt> in <stmt>
+----------------------------------
+inserted TK_WRITE in <IO>
+inserted TK_LPAR in <IO>
+inserted <L> in <IO>
+inserted TK_RPAR in <IO>
+inserted TK_NEWLINE in <IO>
+----------------------------------
+inserted " i*(j+3) = " in <L>
+----------------------------------
+inserted <IO> in <stmt>
+inserted <stmt> in <stmt>
+----------------------------------
+inserted TK_WRITE in <IO>
+inserted TK_LPAR in <IO>
+inserted <L> in <IO>
+inserted TK_RPAR in <IO>
+inserted TK_NEWLINE in <IO>
+----------------------------------
+inserted d in <L>
+inserted <L1> in <L>
+----------------------------------
+inserted e in <L1>
+----------------------------------
+inserted e in <stmt>
+----------------------------------
+inserted e in <Expr1>
+----------------------------------

@@ -3,14 +3,14 @@
 #include<string.h>
 #include "n-tree.h"
 
-void preorder(struct tree *p)
+void preorder(struct tree *p,FILE *fp)
 {
   int i;
   if(p == NULL)
     return;
-  printf("%s ",p->data);
+  fprintf(fp,"%s ",p->data);
   for(i=0; i<p->children; i++)
-    preorder(p->child[i]);
+    preorder(p->child[i],fp);
 }
 
 struct tree *getNextPreorder(struct tree *p)
@@ -64,46 +64,49 @@ struct tree *setChildren(struct tree *parent, int children)
   return parent;
 }
 
-struct tree *insert(struct tree *parent, char *data)
+struct tree *insert(struct tree *p, char *data,int numchildren)
 {
-  if(parent == NULL)
+  if(p == NULL)
   {
-    parent = createNode(data);
-    return parent;
+    p = createNode(data);
+    return p;
   }
 
   int i=0;
 
-  if(parent->child == NULL)
-    parent = setChildren(parent,20);
+  if(p->child == NULL)
+  {
+    //printf("setting children for %s = %d\n",p->data,numchildren);
+    p = setChildren(p,numchildren);
+  }
   else
   {
-    while(parent->child[i] != NULL)
+    while(p->child[i] != NULL)
       i++;
   }
 
   struct tree *new = NULL;
   new = createNode(data);
-  parent->child[i] = new;
-  parent->child[i]->childID = i+1;
-  parent->child[i]->parent = parent;
-  return parent;
+  new->childID = i+1;
+  new->parent = p;
+  p->child[i] = new;
+  return p;
 }
-
 /*
 struct tree *root = NULL;
 
 void main()
 {
   root = createNode("A");
-  insert(root,"E");
-  insert(root,"B");
-  insert(root,"F");
+  setChildren(root,3);
+  insert(root,"E",3);
+  insert(root,"B",3);
+  insert(root,"F",3);
 
-  insert(root->child[1],"C");
-  insert(root->child[1]->child[0],"G");
-  insert(root->child[1]->child[0]->child[0],"H");
-  insert(root->child[2],"D");
+  insert(root->child[1],"C",1);
+  insert(root->child[1]->child[0],"G",1);
+  insert(root->child[1]->child[0]->child[0],"H",1);
+  insert(root->child[2],"D",1);
 
   preorder(root);
 }
