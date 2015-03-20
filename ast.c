@@ -73,43 +73,17 @@ struct tree *traverseAST(struct tree *node)
   if(node == NULL)
     return ;
    
-  ///* 
-  if(node->parent == NULL)
-    printf("node->parent = NULL for %s\n",node->data);
-  else if(node->parent->children == 1)
-    printf("children = 1 for %s's parent %s\n",node->data,node->parent->data);
-  else
-    printf("children = %d for %s's parent %s\n",node->parent->children,node->data,node->parent->data);
-  //*/
-
   while((node->parent != NULL) && (node->parent->children == 1))
   {
-    printf("reducing node %s's parent %s\n", node->data,node->parent->data);
-    
-    /*
-    if(strcmp(node->data,"e")==0)
-    {
-      node->parent->child[node->parent->childID] = NULL;
-      node->parent->children--;
-      //free(node);
-    }
-    else
-    */
     if(node->parent->parent != NULL)
     {
-      struct tree *temp;
-      //printf("gparent not null for %s, parent = %s, gparent = %s\n",node->data,node->parent->data,node->parent->parent->data);
-      temp = node->parent;
-      int ID;
-      ID = temp->childID;
-      temp->parent->child[ID-1] = node;
-      node->parent = temp->parent;
-      node->childID = ID;
-      free(temp);
+      strcpy(node->parent->data, node->data);
+      node->parent->children--;
+      node->parent->child = NULL;
     }
-    printf("Now node %s's parent = %s\n",node->data,node->parent->data);
   }
-/*
+
+  /*
   if(searchothers(node->data) == 1)
   {
     int ID = node->childID;
@@ -123,25 +97,19 @@ struct tree *traverseAST(struct tree *node)
   }
 */
   //printf("node %s (children = %d) crossed while loop,\n",node->data,node->children);
-  
-  int i;
-  for(i=0; i<node->children; i++)
-  {
-    //printf("\nTraversing i = %d %s\n",i,node->child[i]->data);
-    traverseAST(node->child[i]);
-    //printf("here\n");
-  }
-  
-  /*
-  while(i<node->children)
-  {
-    printf("here1\n");
-    printf("Traversing i = %d %s\n",i,node->child[i]->data);
-    traverseAST(node->child[i]);
-    i++;  
-    printf("here2\n");
-  }
-  */
+ 
+  //printf("While loop exited\n");
+  int i=0;
+  //if(node->child != NULL)
+    //printf("i = %d, child[i] = %s\n",i,node->child[i]->data);
+  //else
+    //printf("null ");
+
+    for(i=0; i<node->children; i++)
+    {
+      //printf("\nTraversing i = %d %s\n",i,node->child[i]->data);
+      traverseAST(node->child[i]);
+    }
 }
 
 void ast()
