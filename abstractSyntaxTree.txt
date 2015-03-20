@@ -1,1 +1,0 @@
-<program> <main_function> <function_body> <stmt> TK_INT i <stmt> TK_INT j <stmt> <IO> TK_READ <L> i <stmt> <IO> TK_READ <L> j <stmt> TK_INT c <stmt> TK_INT d <stmt> c <X> <Expr> <stmt> d <X> <Expr> <stmt> <IO> TK_WRITE "Precedence check : i*j+3 = " <stmt> <IO> TK_WRITE <L> c <stmt> <IO> TK_WRITE " i*(j+3) = " <stmt> <IO> TK_WRITE <L> d 

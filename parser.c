@@ -312,12 +312,18 @@ void parse()
           //insertInSymbolTable(stripped);
           //printf("%d matched %s\n",matchcount++,Top(S));
           Pop(S);
-        }
+        } 
         else
-        {  
-          printf("PARSING ERROR :\n'%s' appeared when '%s' was expected!\n",TokenStream[tokenIndex],Top(S));
-          break;
-          parseError = true;
+        { 
+          if(!isEmpty(S))
+          {
+            if(TokenStream[tokenIndex] != NULL)
+            {
+              printf("PARSING ERROR :\n'%s' appeared when '%s' was expected!\n",TokenStream[tokenIndex],Top(S));
+              break;
+              parseError = true;
+            }
+          }
         }
         if(isEmpty(S))
           break;
@@ -332,7 +338,7 @@ void parse()
     while(tokenIndex != tokenCount)
     {
       printf("last error\n");
-      if(strcmp(TokenStream[tokenIndex],"TK_NEWLINE"))
+      if(strcmp(TokenStream[tokenIndex-1],"TK_NEWLINE"))
         tokenIndex++;
       else
         printf("Parsing Error\n");

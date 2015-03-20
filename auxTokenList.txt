@@ -1,18 +1,14 @@
+P
+20
+P
+"AAGTCCAGGATGCA"
 i
-j
 i
-j
-c
-d
-c
+0
+P
+P
 i
-j
-3
-d
-i
-j
-3
-"Precedence check : i*j+3 = "
-c
-" i*(j+3) = "
-d
+"T"
+"DNA"
+"RNA"
+"Neither DNA nor RNA"

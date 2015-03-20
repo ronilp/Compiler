@@ -71,12 +71,14 @@ int searchothers(char c[])
 
 char *childInOperators(struct tree *p)
 {
-  int i;
-  for(i=0; i<120; i++)
-  {
-    if(strcmp(p->data, astops[i]) == 0)
-      return astops[i];
-  }
+  int i,j;
+
+  for(j=0; j<p->children; j++)
+    for(i=0; i<120; i++)
+    {
+      if(strcmp(p->child[j]->data, astops[i]) == 0)
+        return astops[i];
+    }
   return NULL;
 }
 
@@ -163,5 +165,4 @@ void ast()
   traverseAST(root);
   FILE *fp = fopen("abstractSyntaxTree.txt","w");
   preorderAST(root,fp);
-  printf("\n");
 }

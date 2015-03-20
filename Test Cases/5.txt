@@ -31,4 +31,4 @@ main()
     left(P,index)
     right(P,index)
     return
-} 
+}
