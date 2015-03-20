@@ -227,10 +227,8 @@ void parse()
       if((strcmp(rule[k],commas[0]) == 0) || (strcmp(rule[k],commas[1]) == 0) || (strcmp(rule[k],commas[2]) == 0) || (strcmp(rule[k],commas[3]) == 0))
       {
         char temp[MAX_TOKEN_LENGTH];
-        printf("auxindex = %d\n",auxTokenIndex);
         strcpy(temp,auxTokenStream[auxTokenIndex++]);
-        printf("%s\n",temp);
-        insert(current,tkn,j+1); 
+        insert(current,temp,j+1); 
         fprintf(f1,"inserted %s in %s\n",temp,current->data);
       }
       else

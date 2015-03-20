@@ -125,8 +125,8 @@ struct tree *traverseAST(struct tree *node)
 
 void ast()
 {
-  //readInput();
-  //traverseAST(root);
-  //FILE *fp = stdout;
+  readInput();
+  traverseAST(root);
+  FILE *fp = stdout;
   //preorder(root,fp);
 }
