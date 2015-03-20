@@ -13,6 +13,10 @@ int auxTokenCount = 0;
 
 int auxTokenIndex = 0;
 
+int scope = 1;
+
+int SymbolTableIndex = 0;
+
 void initialize()
 {
   FILE *fp1 = fopen("terminals.txt","r");
@@ -145,7 +149,29 @@ char **split(char *a_str, const char a_delim)
   }
   return result;
 }
-
+/*
+int searchSymbolTable(char *c)
+{
+  int i;
+  for(i=0; i<strlen(c); i++)
+  {
+    if(strcmp(c[i],SymbolTable[i].data) == 0)
+      return i;
+  }
+  return -1;
+}
+*/
+/*
+void insertInSymbolTable(char **c)
+{
+  if(strcmp(c[0],"TK_ID"))
+  {
+    strcpy(SymbolTable[SymbolTableIndex].data,c[1]);
+    SymbolTable[SymbolTableIndex].declared = c[2];
+    SymbolTableIndex++;
+  }
+}
+*/
 void parse()
 {
   //int matchcount = 1;
@@ -185,8 +211,6 @@ void parse()
     {   /* If comma present in next token */  
       stripped = split(TokenStream[tokenIndex], ',');
       strcpy(tk2,stripped[0]);
-      //strcpy(tkn,stripped[1]);
-      //printf("tk2 = %s, tkn = %s\n ",tk2,tkn);
       tpos = terminalPosition(tk2);
     }
   
@@ -285,6 +309,7 @@ void parse()
           strcpy(tk2,stripped[0]);
           tpos = terminalPosition(tk2);
           tokenIndex++;
+          //insertInSymbolTable(stripped);
           //printf("%d matched %s\n",matchcount++,Top(S));
           Pop(S);
         }
