@@ -77,28 +77,31 @@ struct tree *traverseAST(struct tree *node)
   if(node->parent == NULL)
     printf("node->parent = NULL for %s\n",node->data);
   else if(node->parent->children == 1)
-    printf("node->parent->children = 1 for %s\n",node->data);
+    printf("node->parent->children = 1 for %s's parent\n",node->data);
   else
-    printf("node->parent->children = %d for %s\n",node->parent->children,node->parent->data);
+    printf("node->parent->children = %d for %s's parent\n",node->parent->children,node->data);
   //*/
 
   while((node->parent != NULL) && (node->parent->children == 1))
   {
-    printf("reducing node %s's parent\n", node->data);
+    printf("reducing node %s's parent %s\n", node->data,node->parent->data);
     if(strcmp(node->data,"e")==0)
     {
       node->parent->child[node->parent->childID] = NULL;
       node->parent->children--;
-      free(node);
+      //free(node);
     }
-    else  if(node->parent->parent != NULL)
+    else if(node->parent->parent != NULL)
     {
       struct tree *temp;
-      printf("node gparent not null for %s\n",node->data);
+      printf("node gparent not null for %s, parent = %s, gparent = %s\n",node->data,node->parent->data,node->parent->parent->data);
       temp = node->parent;
-      node->parent->parent->child[node->parent->childID] = node;
-      node->parent = node->parent->parent;  
-      free(temp);
+      int ID;
+      ID = temp->childID;
+      temp->parent->child[ID] = node;
+      node->parent = temp->parent;
+      node->childID = ID;
+      //free(temp);
     }
   }
 /*
@@ -123,7 +126,7 @@ struct tree *traverseAST(struct tree *node)
 void ast()
 {
   readInput();
-  traverseAST(root);
+  //traverseAST(root);
   FILE *fp = stdout;
-  preorder(root,fp);
+  //preorder(root,fp);
 }

@@ -9,6 +9,10 @@ int tokenCount = 0;
 
 int tokenIndex = 0;
 
+int auxTokenCount = 0;
+
+int auxTokenIndex = 0;
+
 void initialize()
 {
   FILE *fp1 = fopen("terminals.txt","r");
@@ -16,8 +20,9 @@ void initialize()
   FILE *fp3 = fopen("tableparse.txt","r");
   FILE *fp4 = fopen("grammar.txt","r");
   FILE *fp5 = fopen("tokenstream.txt","r");
+  FILE *fp6 = fopen("auxTokenList.txt","r");
 
-  if(fp1 == NULL || fp2 == NULL || fp3 == NULL || fp4 == NULL || fp5 == NULL)
+  if(fp1 == NULL || fp2 == NULL || fp3 == NULL || fp4 == NULL || fp5 == NULL || fp6 == NULL)
   {
     printf("Error opening input files\n");
     exit(0);
@@ -56,6 +61,16 @@ void initialize()
     tokenCount++;
   }
   tokenCount--;
+
+  /* Initializing auxToken Stream */
+  while(!feof(fp6))
+  {
+    char temp[MAX_TOKEN_LENGTH];  
+    fgets(auxTokenStream[auxTokenCount],MAX_TOKEN_LENGTH,fp6);
+    strtok(auxTokenStream[auxTokenCount],"\n");
+    auxTokenCount++;
+  }
+  auxTokenCount--;
 
   fcloseall();
 }
@@ -149,13 +164,13 @@ void parse()
   int ruleNumber;
   struct tree *current = root;
 
+  char tkn[MAX_TOKEN_LENGTH];
   while(!isEmpty(S))
   {
     int tpos,ntpos;
     char tk1[MAX_TOKEN_LENGTH];
-    char tk2[MAX_TOKEN_LENGTH];
     char **stripped;
-    char tkn[MAX_TOKEN_LENGTH];
+    char tk2[MAX_TOKEN_LENGTH];
 
     //printf("Popped = %s\n",Top(S));
 
@@ -170,8 +185,8 @@ void parse()
     {   /* If comma present in next token */  
       stripped = split(TokenStream[tokenIndex], ',');
       strcpy(tk2,stripped[0]);
-      strcpy(tkn,stripped[1]);
-      //printf("stripped[1] = %s\n",stripped[1]);
+      //strcpy(tkn,stripped[1]);
+      //printf("tk2 = %s, tkn = %s\n ",tk2,tkn);
       tpos = terminalPosition(tk2);
     }
   
@@ -208,10 +223,13 @@ void parse()
     int k=j;
     for(k=0; k<=j; k++)
     {
+      //printf("rule[k] = %s\n",rule[k]);
       if((strcmp(rule[k],commas[0]) == 0) || (strcmp(rule[k],commas[1]) == 0) || (strcmp(rule[k],commas[2]) == 0) || (strcmp(rule[k],commas[3]) == 0))
       {
-        insert(current,tkn,j+1);
-        fprintf(f1,"inserted %s in %s\n",tkn,current->data);
+        char temp[MAX_TOKEN_LENGTH];
+        strcpy(temp,auxTokenStream[auxTokenIndex++]);
+        printf("%s\n",temp);
+        fprintf(f1,"inserted %s in %s\n",temp,current->data);
       }
       else
       {

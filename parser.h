@@ -19,6 +19,8 @@ char Grammar[numRules][MAX_RULE_LENGTH];
 
 char TokenStream[MAX_NUM_TOKENS][MAX_TOKEN_LENGTH];
 
+char auxTokenStream[MAX_NUM_TOKENS][MAX_TOKEN_LENGTH];
+
 extern void initialize();
 
 extern void parse();

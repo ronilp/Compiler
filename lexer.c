@@ -7,6 +7,8 @@ int line = 1;
 
 bool lexicalError = false;
 
+FILE *faux;
+
 void readTokens()
 {
   int i=0; 
@@ -38,6 +40,7 @@ void searchToken(char c[],FILE *f)
   if(c[0] == '"')
   {
     fprintf(f,"TK_STRINGLITERAL,%s\n",c); 
+    fprintf(faux,"%s\n",c);
     return;
   }
 
@@ -58,14 +61,21 @@ void searchToken(char c[],FILE *f)
   }
 
   fprintf(f,"TK_ID,%s,%d\n",c,line);
+  fprintf(faux,"%s\n",c);
 }
 
 void searchNumber(char c[], FILE *f, bool floatingPoint)
 {
   if(!floatingPoint)
+  {
     fprintf(f,"TK_INTEGERLITERAL,%s\n",c);
+    fprintf(faux,"%s\n",c);
+  }
   else
+  {
     fprintf(f,"FLOATLITERAL,%s\n",c);
+    fprintf(faux,"%s",c);
+  }
 }
 
 int hash(char c[])
@@ -437,6 +447,7 @@ void dfa()
 
 void lexer()
 {
+  faux = fopen("auxTokenList.txt","w");
   readTokens();
   dfa();
 }

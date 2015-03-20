@@ -1,0 +1,18 @@
+i
+j
+i
+j
+c
+d
+c
+i
+j
+3
+d
+i
+j
+3
+"Precedence check : i*j+3 = "
+c
+" i*(j+3) = "
+d
