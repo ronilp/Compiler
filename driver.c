@@ -6,5 +6,6 @@ int main()
 {
   lexer();
   parser();
+  ast();
   return 0;  
 }

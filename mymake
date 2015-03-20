@@ -1,5 +1,5 @@
-compilerman : driver.o stack.o lexer.o parser.o n-tree.o
-	gcc -Wall -Wextra -o compilerman driver.o stack.o lexer.o parser.o n-tree.o
+compilerman : driver.o stack.o lexer.o parser.o n-tree.o ast.o
+	gcc -Wall -Wextra -o compilerman driver.o stack.o lexer.o parser.o n-tree.o ast.o
 
 driver.o : driver.c
 	gcc -c driver.c
@@ -15,3 +15,6 @@ parser.o : parser.c
 	
 n-tree.o : n-tree.c
 	gcc -c n-tree.c
+	
+ast.o : ast.c
+	gcc -c ast.c

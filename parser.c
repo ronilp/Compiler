@@ -86,18 +86,18 @@ int nonterminalPosition(char *str)
 
 char **split(char *a_str, const char a_delim)
 {
-  char **result    = 0;
-  size_t count     = 0;
-  char *tmp        = a_str;
+  char **result = 0;
+  size_t count = 0;
+  char *tmp = a_str;
   char *last_comma = 0;
   char delim[2];
   delim[0] = a_delim;
   delim[1] = 0;
 
   /* Count how many elements will be extracted. */
-  while (*tmp)
+  while(*tmp)
   {
-    if (a_delim == *tmp)
+    if(a_delim == *tmp)
     {
       count++;
       last_comma = tmp;
@@ -125,7 +125,7 @@ char **split(char *a_str, const char a_delim)
       *(result + idx++) = strdup(token);
       token = strtok(0, delim);
     }
-    assert(idx == count - 1);
+    assert(idx == count-1);
     *(result + idx) = 0;
   }
   return result;
@@ -318,5 +318,5 @@ void parser()
 {
   initialize();
   parse(); 
-  preorder(root);
+  //preorder(root);
 }
