@@ -52,7 +52,7 @@ int searchops(char c[])
 {
   int key;
   key = hashOperators(c);
-  if(strcmp(astops[key],c))
+  if(strcmp(astops[key],c) == 0)
     return 1;
   else
     return 0;
@@ -60,12 +60,56 @@ int searchops(char c[])
 
 int searchothers(char c[])
 {
+  
   int key;
   key = hashOperators(c);
-  if(strcmp(astothers[key],c))
+  if(strcmp(astothers[key],c) == 0)
     return 1;
   else
     return 0;
+}
+
+char *childInOperators(struct tree *p)
+{
+  int i;
+  for(i=0; i<120; i++)
+  {
+    if(strcmp(p->data, astops[i]) == 0)
+      return astops[i];
+  }
+  return NULL;
+}
+
+int valid(struct tree *p)
+{
+  int i;
+  for(i=0; i<120; i++)
+  {
+    if(strcmp(p->data,astothers[i]) == 0)
+      return 0;
+    if(strcmp(p->data,astops[i]) == 0)
+      return 0; 
+  }
+  
+  return 1;
+}
+
+void preorderAST(struct tree *p,FILE *fp)
+{
+  int i;
+  if(p == NULL)
+    return;
+  if((valid(p) == 1) && (strcmp(p->data,"e")!=0))
+  {
+    if(childInOperators(p) != NULL)
+    {
+      fprintf(fp,"%s ",childInOperators(p));
+    }
+    else
+      fprintf(fp,"%s ",p->data);
+  }
+  for(i=0; i<p->children; i++)
+    preorderAST(p->child[i],fp);
 }
 
 struct tree *traverseAST(struct tree *node)
@@ -83,39 +127,41 @@ struct tree *traverseAST(struct tree *node)
     }
   }
 
-  /*
-  if(searchothers(node->data) == 1)
+/*
+  if(node->parent != NULL)
   {
-    int ID = node->childID;
-    int i;
-    for(i=ID; i<node->parent->children; i++)
-    {
-      node->parent->child[i] = node->parent->child[i+1];
-      node->parent->child[i]--;
+    if(searchothers(node->data) == 1)
+    { 
+      // If node is in others
+      int ID = node->childID;
+      int i;
+    
+      for(i=ID-1; i<node->parent->children; i++)
+      {
+        printf("i = %d, data = %s\n",i,node->parent->child[i]->data);
+        printf("copying %s to %s\n",node->parent->child[i+1]->data,node->parent->child[i]->data);
+        strcpy(node->parent->child[i]->data,node->parent->child[i+1]->data);
+      }
+      node->parent->children--;
     }
-    node->parent->children--;
   }
 */
   //printf("node %s (children = %d) crossed while loop,\n",node->data,node->children);
  
-  //printf("While loop exited\n");
   int i=0;
-  //if(node->child != NULL)
-    //printf("i = %d, child[i] = %s\n",i,node->child[i]->data);
-  //else
-    //printf("null ");
 
-    for(i=0; i<node->children; i++)
-    {
-      //printf("\nTraversing i = %d %s\n",i,node->child[i]->data);
-      traverseAST(node->child[i]);
-    }
+  for(i=0; i<node->children; i++)
+  {
+    //printf("\nTraversing i = %d %s\n",i,node->child[i]->data);
+    traverseAST(node->child[i]);
+  }
 }
 
 void ast()
 {
   readInput();
   traverseAST(root);
-  FILE *fp = stdout;
-  preorder(root,fp);
+  FILE *fp = fopen("abstractSyntaxTree.txt","w");
+  preorderAST(root,fp);
+  printf("\n");
 }
