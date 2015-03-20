@@ -98,14 +98,14 @@ struct tree *traverseAST(struct tree *node)
     if(node->parent->parent != NULL)
     {
       struct tree *temp;
-      printf("gparent not null for %s, parent = %s, gparent = %s\n",node->data,node->parent->data,node->parent->parent->data);
+      //printf("gparent not null for %s, parent = %s, gparent = %s\n",node->data,node->parent->data,node->parent->parent->data);
       temp = node->parent;
       int ID;
       ID = temp->childID;
-      temp->parent->child[ID] = node;
+      temp->parent->child[ID-1] = node;
       node->parent = temp->parent;
       node->childID = ID;
-      //free(temp);
+      free(temp);
     }
     printf("Now node %s's parent = %s\n",node->data,node->parent->data);
   }
@@ -122,16 +122,17 @@ struct tree *traverseAST(struct tree *node)
     node->parent->children--;
   }
 */
-  printf("node %s (children = %d) crossed while loop,\n",node->data,node->children);
-  int i = 0;
-  /*
+  //printf("node %s (children = %d) crossed while loop,\n",node->data,node->children);
+  
+  int i;
   for(i=0; i<node->children; i++)
   {
-    printf("\nTraversing i = %d %s\n",i,node->child[i]->data);
+    //printf("\nTraversing i = %d %s\n",i,node->child[i]->data);
     traverseAST(node->child[i]);
-    printf("here\n");
+    //printf("here\n");
   }
-  */
+  
+  /*
   while(i<node->children)
   {
     printf("here1\n");
@@ -140,6 +141,7 @@ struct tree *traverseAST(struct tree *node)
     i++;  
     printf("here2\n");
   }
+  */
 }
 
 void ast()
@@ -147,5 +149,5 @@ void ast()
   readInput();
   traverseAST(root);
   FILE *fp = stdout;
-  //preorder(root,fp);
+  preorder(root,fp);
 }

@@ -7,10 +7,10 @@ char astothers[120][20];
 
 struct tree *traverseAST(struct tree *node);
 
-int searchops(char c[]);
+extern int searchops(char c[]);
 
-int searchothers(char c[]);
+extern int searchothers(char c[]);
 
-int hashOperators(char c[]);
+extern int hashOperators(char c[]);
 
-void readInput();
+extern void readInput();
