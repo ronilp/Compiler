@@ -1,0 +1,3 @@
+PREORDER TRAVERSAL OF AST
+
+<program> <main_function> <function_body> <stmt> TK_INT A <squarebracket> 3 <stmt> TK_INT B <squarebracket> 3 <stmt> TK_REPEAT i <Expr> <Expr2> <mulexp> <divexp> <mod> 0 <Expr> <Expr2> <mulexp> <divexp> <mod> 3 <stmt> A TK_ASSIGNOP i <Expr> <stmt> B TK_ASSIGNOP i <Expr> <stmt> TK_INT sumA <stmt> TK_INT sumB <stmt> TK_REPEAT i <Expr> <Expr2> <mulexp> <divexp> <mod> 0 <Expr> <Expr2> <mulexp> <divexp> <mod> 3 <stmt> sumA TK_ASSIGNOP <Expr> <stmt> sumB TK_ASSIGNOP <Expr> <stmt> <IO> TK_WRITE "Sum of 1st Array = " <stmt> <IO> TK_WRITE <L> c <stmt> <IO> TK_WRITE " Sum of 2nd Array = " <stmt> <IO> TK_WRITE <L> d <stmt> <IO> TK_WRITE "Total Sum = " <stmt> TK_INT z <stmt> z TK_ASSIGNOP <Expr> <stmt> <IO> TK_WRITE <L> z 

@@ -1,8 +1,12 @@
+// Team number 38
+// MOHIT GUPTA (2012A7PS021P)
+// RONIL PANCHOLIA (2012C6PS629P)
+
+
 #include<stdio.h>
 #include<stdlib.h>
 #include<stdbool.h>
 #include "lexer.h"
-#include "symbolTable.h"
 
 int line = 1;
 
@@ -62,7 +66,7 @@ void searchToken(char c[],FILE *f)
   }
 
   fprintf(f,"TK_ID,%s,%d\n",c,line);
-  fprintf(faux,"%s\n",c);
+  fprintf(faux,"TK_ID,%s,%d\n",c,line);
 }
 
 void searchNumber(char c[], FILE *f, bool floatingPoint)
@@ -70,12 +74,12 @@ void searchNumber(char c[], FILE *f, bool floatingPoint)
   if(!floatingPoint)
   {
     fprintf(f,"TK_INTEGERLITERAL,%s\n",c);
-    fprintf(faux,"%s\n",c);
+    fprintf(faux,"TK_INTEGERLITERAL,%s,%d\n",c,line);
   }
   else
   {
     fprintf(f,"FLOATLITERAL,%s\n",c);
-    fprintf(faux,"%s",c);
+    fprintf(faux,"TK_FLOATLITERAL,%s,%d\n",c,line);
   }
 }
 
@@ -104,7 +108,7 @@ void dfa()
     printf("testcase not found\n");
     exit(0);
   }
-
+  
   while(1)
   { 
     memset(str,0,sizeof(str));
@@ -457,6 +461,7 @@ void lexer()
   faux = fopen("auxTokenList.txt","w");
   readTokens();
   dfa();
+  printf("Check tokenstream.txt for Lexer output\n");
 }
 /*
 int main()

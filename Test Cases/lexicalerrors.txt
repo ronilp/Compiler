@@ -1,0 +1,27 @@
+main()
+{
+    int A[3]
+    int B[3]  
+    repeat i from 0 to 3.3.2
+    {
+        A[i] is 12*i
+        B[i] is 2*i
+    }
+    int sumA
+    int sumB
+    $ This is a comment
+    repeat i from 0 to 3
+    {
+        sumA is sumA + A[i]
+        sumB is sumB + B[i]
+    }
+    write("Sum of 1st Array = )
+    write(c)
+    write(" Sum of 2nd Array = ")
+    write(d)
+    write("Total Sum = ")
+    int z
+    z is sumA + sumB
+    write(z)
+    return
+}

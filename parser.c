@@ -1,3 +1,8 @@
+// Team number 38
+// MOHIT GUPTA (2012A7PS021P)
+// RONIL PANCHOLIA (2012C6PS629P)
+
+
 #include<stdio.h>
 #include<string.h>
 #include<stdlib.h>
@@ -12,10 +17,6 @@ int tokenIndex = 0;
 int auxTokenCount = 0;
 
 int auxTokenIndex = 0;
-
-int scope = 1;
-
-int SymbolTableIndex = 0;
 
 void initialize()
 {
@@ -61,6 +62,7 @@ void initialize()
   {
     char temp[MAX_TOKEN_LENGTH];
     fgets(TokenStream[tokenCount],MAX_TOKEN_LENGTH,fp5);
+    char temptoken;
     strtok(TokenStream[tokenCount],"\n");
     tokenCount++;
   }
@@ -149,29 +151,7 @@ char **split(char *a_str, const char a_delim)
   }
   return result;
 }
-/*
-int searchSymbolTable(char *c)
-{
-  int i;
-  for(i=0; i<strlen(c); i++)
-  {
-    if(strcmp(c[i],SymbolTable[i].data) == 0)
-      return i;
-  }
-  return -1;
-}
-*/
-/*
-void insertInSymbolTable(char **c)
-{
-  if(strcmp(c[0],"TK_ID"))
-  {
-    strcpy(SymbolTable[SymbolTableIndex].data,c[1]);
-    SymbolTable[SymbolTableIndex].declared = c[2];
-    SymbolTableIndex++;
-  }
-}
-*/
+
 void parse()
 {
   //int matchcount = 1;
@@ -197,6 +177,7 @@ void parse()
     char tk1[MAX_TOKEN_LENGTH];
     char **stripped;
     char tk2[MAX_TOKEN_LENGTH];
+    char temptoken[200];
 
     //printf("Popped = %s\n",Top(S));
 
@@ -208,9 +189,12 @@ void parse()
       tpos = terminalPosition(TokenStream[tokenIndex]);
     }
     else
-    {   /* If comma present in next token */  
+    {   /* If comma present in next token */
+      strcpy(temptoken,TokenStream[tokenIndex]);
       stripped = split(TokenStream[tokenIndex], ',');
       strcpy(tk2,stripped[0]);
+      //strcpy(tkn,stripped[1]);
+      //printf("tk2 = %s, tkn = %s\n ",tk2,tkn);
       tpos = terminalPosition(tk2);
     }
   
@@ -248,11 +232,12 @@ void parse()
     for(k=0; k<=j; k++)
     {
       //printf("rule[k] = %s\n",rule[k]);
+      
       if((strcmp(rule[k],commas[0]) == 0) || (strcmp(rule[k],commas[1]) == 0) || (strcmp(rule[k],commas[2]) == 0) || (strcmp(rule[k],commas[3]) == 0))
       {
         char temp[MAX_TOKEN_LENGTH];
         strcpy(temp,auxTokenStream[auxTokenIndex++]);
-        insert(current,temp,j+1); 
+        insert(current,temp,j+1);
         fprintf(f1,"inserted %s in %s\n",temp,current->data);
       }
       else
@@ -309,21 +294,14 @@ void parse()
           strcpy(tk2,stripped[0]);
           tpos = terminalPosition(tk2);
           tokenIndex++;
-          //insertInSymbolTable(stripped);
           //printf("%d matched %s\n",matchcount++,Top(S));
           Pop(S);
-        } 
+        }
         else
-        { 
-          if(!isEmpty(S))
-          {
-            if(TokenStream[tokenIndex] != NULL)
-            {
-              printf("PARSING ERROR :\n'%s' appeared when '%s' was expected!\n",TokenStream[tokenIndex],Top(S));
-              break;
-              parseError = true;
-            }
-          }
+        {  
+          printf("PARSING ERROR :\n'%s' appeared when '%s' was expected!\n",TokenStream[tokenIndex],Top(S));
+          break;
+          parseError = true;
         }
         if(isEmpty(S))
           break;
@@ -332,13 +310,13 @@ void parse()
   }
   // tokenIndex should be = numTokens now
   if(tokenIndex == tokenCount)
-    printf("Parsing Complete\n");
+    printf("Parsing Complete\nPlease Check parstree.txt and parsetreetraversal.txt for parser output\n");
   else
   {
     while(tokenIndex != tokenCount)
     {
       printf("last error\n");
-      if(strcmp(TokenStream[tokenIndex-1],"TK_NEWLINE"))
+      if(strcmp(TokenStream[tokenIndex],"TK_NEWLINE"))
         tokenIndex++;
       else
         printf("Parsing Error\n");

@@ -1,0 +1,34 @@
+function void left(protein P[],int index)
+{
+    int i
+    write("left part ")
+    repeat i from 0 to index
+    {
+        write(P[i])
+    }
+    write(" ")
+    return
+}
+function void right(protein P[],int index)
+{
+    int i
+    write("right part ")
+    repeat i from index+3 to length(P)
+    {
+        write(P[i])
+    }
+    write(" ")
+    return
+}
+main()
+{
+    protein P[20]
+    P is "AGGACTTAGATACCAAG"
+    seq s[3]
+    s is "CTT"
+    int index
+    index is P # S
+    left(P,index)
+    right(P,index)
+    return
+}
