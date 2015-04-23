@@ -3,9 +3,9 @@
 // RONIL PANCHOLIA (2012C6PS629P)
 
 
-#include<stdio.h>
-#include<stdlib.h>
-#include<stdbool.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
 #include "lexer.h"
 
 int line = 1;
@@ -78,7 +78,7 @@ void searchNumber(char c[], FILE *f, bool floatingPoint)
   }
   else
   {
-    fprintf(f,"FLOATLITERAL,%s\n",c);
+    fprintf(f,"TK_FLOATLITERAL,%s\n",c);
     fprintf(faux,"TK_FLOATLITERAL,%s,%d\n",c,line);
   }
 }
@@ -451,8 +451,9 @@ void dfa()
   fcloseall();
   if(lexicalError)
   {
-    FILE *o = fopen("output.txt","w");
+    FILE *o = fopen("tokenstream.txt","w");
     fcloseall();
+    exit(0);
   }
 }
 

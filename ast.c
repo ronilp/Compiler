@@ -2,10 +2,10 @@
 // MOHIT GUPTA (2012A7PS021P)
 // RONIL PANCHOLIA (2012C6PS629P)
 
-#include<stdio.h>
-#include<stdlib.h>
+#include <stdio.h>
+#include <stdlib.h>
 #include "ast.h"
-#include<string.h>
+#include <string.h>
 #include "parser.h"
 
 void readInput()
@@ -122,7 +122,7 @@ struct tree *traverseAST(struct tree *node)
 {
   if(node == NULL)
     return ;
-   
+  
   while((node->parent != NULL) && (node->parent->children == 1))
   {
     if(node->parent->parent != NULL)
@@ -130,7 +130,6 @@ struct tree *traverseAST(struct tree *node)
       strcpy(node->parent->data, node->data);
       node->parent->child = node->child;
       node->parent->children = node->children;
-      //node->parent->child = NULL;
     }
   }
 
@@ -158,9 +157,7 @@ struct tree *traverseAST(struct tree *node)
 */  
 /////////////////////////
   //printf("node %s (children = %d) crossed while loop,\n",node->data,node->children);
- 
   int i=0;
-
   for(i=0; i<node->children; i++)
   {
     //printf("\nTraversing i = %d %s\n",i,node->child[i]->data);
@@ -168,9 +165,11 @@ struct tree *traverseAST(struct tree *node)
   }
 }
 
+
 void ast()
 {
   readInput();
+  /*
   FILE *fp = stdout;
   printf("\n\n");
   preorder(root,fp);
@@ -178,12 +177,11 @@ void ast()
   printf("\n\n");
   preorder(root,fp);
   printf("\n");
-  /*
+  */
+  
   FILE *fp = fopen("abstractSyntaxTree.txt","w");
   fprintf(fp,"PREORDER TRAVERSAL OF AST\n\n");
-  preorderAST(root,fp);
+  traverseAST(root);
   preorder(root,fp);
-  printf(" \n Check abstractSyntaxTree.txt for ast output \n");
-  */
+  printf("Check abstractSyntaxTree.txt for ast output \n");
 }
-

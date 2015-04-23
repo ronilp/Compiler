@@ -3,12 +3,12 @@
 // RONIL PANCHOLIA (2012C6PS629P)
 
 
-#include<stdio.h>
-#include<string.h>
-#include<stdlib.h>
-#include<stdbool.h>
-#include<assert.h>
-#include"parser.h"
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#include <stdbool.h>
+#include <assert.h>
+#include "parser.h"
 
 int tokenCount = 0;
 
@@ -237,13 +237,13 @@ void parse()
       {
         char temp[MAX_TOKEN_LENGTH];
         strcpy(temp,auxTokenStream[auxTokenIndex++]);
-        insert(current,temp,j+1);
+         insert(current,temp,j+1);
         fprintf(f1,"inserted %s in %s\n",temp,current->data);
       }
       else
       {
-        insert(current,rule[k],j+1);
-        fprintf(f1,"inserted %s in %s\n",rule[k],current->data);
+      	insert(current,rule[k],j+1);
+        fprintf(f1,"inserted %s in %s\n",rule[k],current->data); 
       }
     }
     fprintf(f1,"----------------------------------\n");
@@ -349,6 +349,6 @@ void parser()
   initialize();
   parse(); 
   FILE *f = fopen("parsetreetraversal.txt","w");
-  fprintf(f,"PREORDER TRAVERSAL\n");
+  fprintf(f,"PREORDER TRAVERSAL\n\n");
   preorder(root,f);
 }
