@@ -128,7 +128,7 @@ void operators(char buffer[][100], int bufferindex)
 	int i;
 	for(i=0;i<bufferindex;i++)
 	{
-		if((strcmp(buffer[i],"TK_MULTIPLY") == 0) || (strcmp(buffer[i],"TK_DIVIDE") == 0) || (strcmp(buffer[i],"TK_PLUS") == 0) || (strcmp(buffer[i],"TK_MINUS") == 0) || (strcmp(buffer[i],"TK_MOD") == 0) || (strcmp(buffer[i],"TK_COMPARE") == 0) || (strcmp(buffer[i],"TK_GT") == 0) || (strcmp(buffer[i],"TK_LT") == 0) || (strcmp(buffer[i],"TK_ASSIGNOP") == 0) || (strcmp(buffer[i],"TK_AND") == 0) || (strcmp(buffer[i],"TK_OR") == 0) || (strcmp(buffer[i],"TK_NOTEQUAL") == 0) || ((strcmp(tokenType(buffer[i]),"IntegerLiteral")  == 0) && (strcmp(tokenType(buffer[i-1]),"TK_LSQBRAC")  == 0)) || ((strcmp(tokenType(buffer[i]),"FloatLiteral")  == 0) && (strcmp(tokenType(buffer[i-1]),"TK_LSQBRAC")  == 0)) || (strcmp(tokenType(buffer[i]),"StringLiteral") == 0))
+		if((strcmp(buffer[i],"TK_MULTIPLY") == 0) || (strcmp(buffer[i],"TK_DIVIDE") == 0) || (strcmp(buffer[i],"TK_PLUS") == 0) || (strcmp(buffer[i],"TK_MINUS") == 0) || (strcmp(buffer[i],"TK_MOD") == 0) || (strcmp(buffer[i],"TK_COMPARE") == 0) || (strcmp(buffer[i],"TK_GT") == 0) || (strcmp(buffer[i],"TK_LT") == 0) || (strcmp(buffer[i],"TK_ASSIGNOP") == 0) || (strcmp(buffer[i],"TK_AND") == 0) || (strcmp(buffer[i],"TK_OR") == 0) || (strcmp(buffer[i],"TK_NOTEQUAL") == 0) || ((strcmp(tokenType(buffer[i]),"IntegerLiteral")  == 0) && (strcmp(tokenType(buffer[i-1]),"TK_LSQBRAC")  == 0)) || ((strcmp(tokenType(buffer[i]),"FloatLiteral")  == 0) && (strcmp(tokenType(buffer[i-1]),"TK_LSQBRAC")  == 0)) || (strcmp(tokenType(buffer[i]),"StringLiteral") == 0) || (strcmp(buffer[i],"TK_MOD") == 0))
 		{
 			//printf("For tokens %s %s %s\n",buffer[i-1],buffer[i],buffer[i+1]);
 

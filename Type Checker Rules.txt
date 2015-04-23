@@ -1,32 +1,12 @@
 Type Checker Rules:
 i. The type of an identifier is the type appearing while declaring the variable.
-ii. The type of TK_NUM is integer.
-iii. The type of TK_FLOAT is real.
-iv. The type of an identifier of a record type expanded with a dot followed by the
-field name is same as that of the field.
-v. The type of a record type is a tuple (type of field1, type of field 2, type of
-field3,.......and so on). Example : Consider the following type definition
-record #marks
-type real : maths;
-type int: rollnum;
-type real: physics;
-type real: chemistry;
-endrecord;
-The type of the above record is (real, integer, real, real) (say T).
-vi. The type of a simple expression (say E) of the form expression(say E1)
-<operator> Expression(say E2)
-a. is integer, if both expressions are of type integer and the operator is
-arithmetic operator.
-b. is real, if both the expressions are of type real and the operator is
-arithmetic operator.
-c. is boolean, if both expressions are of type integer and the operator is
-relational operator.
-d. is boolean, if both expressions are of type real and the operator is
-relational.
-e. is boolean, if both expressions are of type boolean and the operator is
-logical.
-f. is record type T if both E1 and E2 are of the same record type T.
-The type of the expression is ERROR, if the above rules do not derive the
-type of E appropriately.
-The type of an identifier or an expression is computed by traversing the abstract
-syntax tree
+ii. The type of TK_INTEGERLITERAL is integer.
+iii. The type of TK_FLOATLITERAL is float.
+iv. The type of TK_STRINGLITERAL is protein.
+v. The type of an array is same for all the elements of the array.
+vi. The type of a simple expression (say E) of the form expression(say E1) <operator> Expression(say E2)
+	a. is integer, if both expressions are of type integer and the operator is arithmetic operator (+,-,*,/,%).
+	b. is boolean, if both expressions are of type integer and the operator is relational operator (<,>,<=,>=,!=,=).
+	e. is boolean, if both expressions are of type boolean and the operator is logical (AND, OR, NOT).
+vii. The type of the expression is ERROR, if the above rules do not derive the type of E appropriately.
+viii. The type of an identifier or an expression is computed by traversing the abstract syntax tree

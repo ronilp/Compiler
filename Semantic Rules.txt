@@ -1,0 +1,15 @@
+Semantic rules :
+i. An identifier cannot be declared multiple times in the same scope.
+ii. An identifier must be declared before its use.
+iii. The line in which an identifier is declared should not contain anything other than the name of the identifier and its data type.
+iv. The types and the number of parameters returned by a function must be the same as that of the parameters used in invoking the function.
+v. The function that does not return any value, must be invoked appropriately.
+vi. The function that returns some value, may be invoked with the help of an assignment operator by assigning it to a variable of the data type same as the return type of the function.
+vii. Function input parameters passed while invoking it should be of the same type as those used in the function definition. Number of input parameters must be same as that of those used in the function definition.
+viii. A condition statement must have the expression of boolean type.
+ix. Function overloading is not allowed.
+x. A function cannot be invoked recursively.
+xi. An identifier used beyond its scope must be viewed as undefined
+xii. The right hand side expression of an assignment statement must be of the same type as that of the left hand side identifier.
+xiii. The left and the right side of every operator (+,-,*,/,%,#) must be of the same data type.
+xiv. The main function must always be defined as the last function of the program.
