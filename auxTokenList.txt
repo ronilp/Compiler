@@ -1,14 +1,18 @@
-TK_ID,P,3
-TK_INTEGERLITERAL,20,3
-TK_ID,P,4
-"AAGTCCAGGATGCA"
+TK_ID,i,3
+TK_ID,j,4
 TK_ID,i,5
-TK_ID,i,6
-TK_INTEGERLITERAL,0,6
-TK_ID,P,6
-TK_ID,P,8
-TK_ID,i,8
-"T"
-"DNA"
-"RNA"
-"Neither DNA nor RNA"
+TK_ID,j,6
+TK_ID,c,7
+TK_ID,d,8
+TK_ID,c,9
+TK_ID,i,9
+TK_ID,j,9
+TK_INTEGERLITERAL,3,9
+TK_ID,d,10
+TK_ID,i,10
+TK_ID,j,10
+TK_INTEGERLITERAL,3,10
+"Precedence check : i*j+3 = "
+TK_ID,c,12
+" i*(j+3) = "
+TK_ID,d,14

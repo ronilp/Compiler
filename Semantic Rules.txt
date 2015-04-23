@@ -13,3 +13,7 @@ xi. An identifier used beyond its scope must be viewed as undefined
 xii. The right hand side expression of an assignment statement must be of the same type as that of the left hand side identifier.
 xiii. The left and the right side of every operator (+,-,*,/,%,#) must be of the same data type.
 xiv. The main function must always be defined as the last function of the program.
+xv. Any identifier cannot take the name of exisiting functions.
+xvi. Any function cannot take the name of exisiting identifiers.
+xvii. Any function cannot be assigned to a variable.
+xviii. A function can only be called inside a function.

@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include "lexer.h"
 #include "parser.h"
+#include "CodeGeneration.h"
 
 int main()
 {
@@ -12,5 +13,6 @@ int main()
   symbolTable();
   parser();
   ast();
+  code();
   return 0;  
 }

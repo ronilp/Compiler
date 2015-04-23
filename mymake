@@ -1,5 +1,5 @@
-execute : driver.o stack.o lexer.o parser.o n-tree.o ast.o symbolTable.o
-	gcc -Wall -Wextra -o execute driver.o stack.o lexer.o parser.o n-tree.o ast.o symbolTable.o
+execute : driver.o stack.o lexer.o parser.o n-tree.o ast.o symbolTable.o CodeGeneration.o
+	gcc -Wall -Wextra -o execute driver.o stack.o lexer.o parser.o n-tree.o ast.o symbolTable.o CodeGeneration.o
 
 driver.o : driver.c
 	gcc -c driver.c
@@ -18,5 +18,9 @@ n-tree.o : n-tree.c
 	
 ast.o : ast.c
 	gcc -c ast.c
+
 symbolTable.o : symbolTable.c
 	gcc -c symbolTable.c
+
+CodeGeneration.o : CodeGeneration.c
+	gcc -c CodeGeneration.c	
