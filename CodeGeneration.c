@@ -1,3 +1,7 @@
+// Team number 38
+// MOHIT GUPTA (2012A7PS021P)
+// RONIL PANCHOLIA (2012C6PS629P)
+
 #include <stdio.h>
 #include <string.h>
 #include "CodeGeneration.h"
@@ -22,10 +26,11 @@ int present(char str[])
 
 void code()
 {
-	FILE *fp = fopen("code.txt","w");
+	FILE *fp = fopen("code.asm","w");
 	FILE *fp1 = fopen("auxTokenList.txt","r");
-  fprintf(fp,".MODEL TINY\n");
-	fprintf(fp,".DATA\n\n");
+  	fprintf(fp,".MODEL TINY\n");
+	fprintf(fp,".DATA\n;\n\n");
+	fprintf(fp,".STACK\n\n");
  
   if(fp1 == NULL)
     printf("auxTokenList.txt not found\n");

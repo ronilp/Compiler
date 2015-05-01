@@ -1,5 +1,8 @@
 .MODEL TINY
 .DATA
+;
+
+.STACK
 
 i DB ?
 j DB ?
